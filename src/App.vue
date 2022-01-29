@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import Tsai from './components/Tsai.vue';
+    import Tsai from './components/Tsai.vue';
 </script>
 
 <template>
-  <Tsai msg="Hello Vue 3 + TypeScript + Vite" />
+    <Tsai msg="Hello Vue 3 + TypeScript + Vite" />
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    #app {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 60px;
+    }
 </style>
