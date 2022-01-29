@@ -3,7 +3,10 @@
 </script>
 
 <template>
-    <Tsai msg="Hello Vue 3 + TypeScript + Vite" />
+    <router-link to="/">Go to Tsai</router-link> |
+    <router-link to="/xxx">Go to Tsai2</router-link>
+    <hr />
+    <router-view />
 </template>
 
 <style>
