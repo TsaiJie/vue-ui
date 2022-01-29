@@ -13,7 +13,8 @@
     background: pink;
     display: flex;
     padding: 16px;
-    
+    position: relative;
+    z-index: 10;
     > .logo {
         max-width: 6em;
         //flex + margin-right:auto 可以把相邻的元素忘右边推
