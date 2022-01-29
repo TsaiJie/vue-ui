@@ -22,6 +22,7 @@ module.exports = {
         quotes: ['error', 'single'],
         semi: ['error', 'always'],
         'vue/no-multiple-template-root': 'off',
-        
+        'vue/multi-word-component-names': 0,
+
     },
 };

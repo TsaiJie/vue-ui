@@ -1,12 +1,16 @@
-<script>
-
-</script>
+<script></script>
 
 <template>
-
+    <div>
+        <div class="topNav">
+            <div class="logo"></div>
+            <div class="menu"></div>
+        </div>
+        <div class="content">
+            <aside>边栏</aside>
+            <main>主内容</main>
+        </div>
+    </div>
 </template>
 
-
-<style scoped>
-
-</style>
+<style scoped></style>

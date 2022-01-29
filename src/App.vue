@@ -3,9 +3,9 @@ import Tsai from './components/Tsai.vue';
 </script>
 
 <template>
-    <router-link to="/">Go to Tsai</router-link>
+    <router-link to="/">Home</router-link>
     <span>|</span>
-    <router-link to="/xxx">Go to Tsai2</router-link>
+    <router-link to="/doc">Doc</router-link>
     <hr />
     <router-view />
 </template>
