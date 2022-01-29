@@ -3,7 +3,8 @@
 </script>
 
 <template>
-    <router-link to="/">Go to Tsai</router-link> |
+    <router-link to="/">Go to Tsai</router-link>
+    |
     <router-link to="/xxx">Go to Tsai2</router-link>
     <hr />
     <router-view />
