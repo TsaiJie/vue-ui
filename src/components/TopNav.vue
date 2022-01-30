@@ -26,6 +26,7 @@ const toggleAside = () => {
     z-index: 10;
     justify-content: center;
     align-items: center;
+
     > .logo {
         max-width: 6em;
         //flex + margin-right:auto 可以把相邻的元素忘右边推
@@ -42,6 +43,7 @@ const toggleAside = () => {
             margin: 0 1em;
         }
     }
+
     > .toggleAsideButton {
         display: none;
         background: red;
@@ -51,23 +53,25 @@ const toggleAside = () => {
         left: 16px;
         top: 50%;
         transform: translateY(-50%);
+
         &:hover {
             cursor: pointer;
         }
     }
+
     //大于500像素就不显示
     @media (max-width: 500px) {
         > .menu {
             display: none;
         }
+
         > .logo {
             margin: 0 auto;
         }
+
         > .toggleAsideButton {
             display: inline-block;
         }
-        
     }
-
 }
 </style>
