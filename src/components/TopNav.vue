@@ -1,6 +1,14 @@
+<script setup lang="ts">
+import { inject, Ref } from 'vue';
+
+const asideVisible = inject<Ref<boolean>>('asideVisible') as Ref<boolean>;
+const toggleAside = () => {
+    asideVisible.value = !asideVisible.value;
+};
+</script>
 <template>
     <div class="top-nav">
-        <router-link class="logo" to="/">LOGO</router-link>
+        <div class="logo" @click="toggleAside">LOGO</div>
         <ul class="menu">
             <li>菜单1</li>
             <li>菜单2</li>
@@ -15,18 +23,19 @@
     padding: 16px;
     position: relative;
     z-index: 10;
+
     > .logo {
         max-width: 6em;
         //flex + margin-right:auto 可以把相邻的元素忘右边推
         margin-right: auto;
     }
-    
+
     > .menu {
         display: flex;
         //文字不换行
         white-space: nowrap;
         flex-wrap: nowrap;
-        
+
         > li {
             margin: 0 1em;
         }

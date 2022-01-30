@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import TopNav from '../components/TopNav.vue';
+import { inject, Ref } from 'vue';
+const asideVisible = inject<Ref<boolean>>('asideVisible');
 </script>
 
 <template>
     <div>
         <TopNav />
         <div class="content">
-            <aside>
+            <aside v-show="asideVisible">
                 <h2>组件列表</h2>
                 <ol>
                     <li>
@@ -36,7 +38,7 @@ aside {
     top: 0;
     left: 0;
     padding: 70px 16px 16px;
-    
+
     > h2 {
         margin-bottom: 4px;
     }
