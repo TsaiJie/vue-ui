@@ -8,11 +8,12 @@ const toggleAside = () => {
 </script>
 <template>
     <div class="top-nav">
-        <div class="logo" @click="toggleAside">LOGO</div>
+        <div class="logo">LOGO</div>
         <ul class="menu">
-            <li>菜单1</li>
+            <router-link to="/">首页</router-link>
             <li>菜单2</li>
         </ul>
+        <span class="toggleAsideButton" @click="toggleAside"></span>
     </div>
 </template>
 
@@ -23,7 +24,8 @@ const toggleAside = () => {
     padding: 16px;
     position: relative;
     z-index: 10;
-
+    justify-content: center;
+    align-items: center;
     > .logo {
         max-width: 6em;
         //flex + margin-right:auto 可以把相邻的元素忘右边推
@@ -40,5 +42,32 @@ const toggleAside = () => {
             margin: 0 1em;
         }
     }
+    > .toggleAsideButton {
+        display: none;
+        background: red;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    //大于500像素就不显示
+    @media (max-width: 500px) {
+        > .menu {
+            display: none;
+        }
+        > .logo {
+            margin: 0 auto;
+        }
+        > .toggleAsideButton {
+            display: inline-block;
+        }
+        
+    }
+
 }
 </style>
