@@ -1,25 +1,19 @@
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, toRefs } from 'vue';
 
-const { value } = defineProps({
-    value: {
-        type: Boolean,
-        required: true
-    },
-});
-const emits = defineEmits(['input']);
-const checked = ref(value);
+const props = defineProps<{ checked: boolean }>();
+const { checked } = toRefs(props);
+const emits = defineEmits(['update:checked']);
 
 const toggle = () => {
-    checked.value = !checked.value;
-    emits('input', checked.value);
+    emits('update:checked', !checked.value);
 };
 </script>
 <template>
-    <button :class="{ checked }" @click="toggle">
+    <button :class="{ checked}" @click="toggle">
         <span></span>
     </button>
-    <div>{{ value }}</div>
+    <div>{{ checked }}</div>
 </template>
 
 <style scoped lang="less">

@@ -17,6 +17,7 @@ module.exports = {
     },
     plugins: ['vue', '@typescript-eslint'],
     rules: {
+        'vue/no-v-model-argument': 'off',
         indent: ['error', 4],
         'linebreak-style': ['error', 'unix'],
         quotes: ['error', 'single'],
