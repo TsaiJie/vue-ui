@@ -4,7 +4,64 @@
 
 <template>
 <div>
-    我是switch组件
+    
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
+    <p>我是switch组件</p>
 </div>
 </template>
 

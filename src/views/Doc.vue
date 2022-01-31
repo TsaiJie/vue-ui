@@ -6,8 +6,8 @@ const asideVisible = inject<Ref<boolean>>('asideVisible');
 </script>
 
 <template>
-    <div>
-        <TopNav />
+    <div class="layout">
+        <TopNav class="top-nav"/>
         <div class="content">
             <aside v-show="asideVisible">
                 <h2>组件列表</h2>
@@ -33,14 +33,38 @@ const asideVisible = inject<Ref<boolean>>('asideVisible');
 </template>
 
 <style scoped lang="less">
+.layout {
+    display: flex;
+    height: 100vh;
+    > .top-nav {
+        flex-shrink: 0;
+    }
+    >.content {
+        display: flex;
+        flex-grow: 1;
+        padding-top: 60px;
+        padding-left: 156px;
+        > .main {
+            flex-grow: 1;
+            background: lightgreen;
+            padding: 16px;
+            overflow: auto;
+        }
+        @media(max-width: 500px){
+            padding-left: 0;
+        }
+    }
+}
+
 aside {
     background: lightblue;
     width: 150px;
     position: fixed;
-    //top: 0;
-    //left: 0;
-    padding: 20px 16px 0;
-
+    top: 0;
+    left: 0;
+    padding: 70px 16px 16px;
+    height: 100%;
+    
     > h2 {
         margin-bottom: 4px;
     }
@@ -51,13 +75,7 @@ aside {
         }
     }
 }
-.main {
-    margin-left: 150px;
-}
-@media (max-width: 500px) {
-    .main {
-        margin-left: 0;
-    }
-}
+
+
 
 </style>
