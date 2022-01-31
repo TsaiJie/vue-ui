@@ -37,9 +37,9 @@ aside {
     background: lightblue;
     width: 150px;
     position: fixed;
-    top: 0;
-    left: 0;
-    padding: 70px 16px 0;
+    //top: 0;
+    //left: 0;
+    padding: 20px 16px 0;
 
     > h2 {
         margin-bottom: 4px;
@@ -51,8 +51,13 @@ aside {
         }
     }
 }
-
 .main {
     margin-left: 150px;
 }
+@media (max-width: 500px) {
+    .main {
+        margin-left: 0;
+    }
+}
+
 </style>
