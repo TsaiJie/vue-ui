@@ -15,6 +15,7 @@ module.exports = {
     // prettier 单行最大长度120字符
     printWidth: 80,
     // prettier 单行超出最大长度自动折行
-    proseWrap: 'always',
+    proseWrap: 'preserve',
     vueIndentScriptAndStyle: false,
+    bracketSameLine: true,
 };
