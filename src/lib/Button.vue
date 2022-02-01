@@ -22,8 +22,8 @@ const { ...rest } = attrs;
 <template>
     <button
         v-bind="rest"
-        class="vue-button"
-        :class="{ [`theme-${theme}`]: theme }"
+        class="tsai-button"
+        :class="{ [`tsai-theme-${theme}`]: theme }"
     >
         <slot></slot>
     </button>
@@ -35,7 +35,7 @@ const { ...rest } = attrs;
 @color: #333;
 @blue: #40a9ff;
 @radius: 4px;
-.vue-button {
+.tsai-button {
     box-sizing: border-box;
     height: @h;
     padding: 0 12px;

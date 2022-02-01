@@ -66,7 +66,7 @@ const toggle = () => {
                 '.icon-loading'
             ) as HTMLElement;
             const { className } = buttonEl;
-            buttonEl.className = `${className} disabled`;
+            buttonEl.className = `${className} tsai-disabled`;
             loadingEl.style.display = 'inline-block';
             const shouldToggle = beforeChange.value();
             console.log(loadingEl);
@@ -99,7 +99,7 @@ const handleTextLength = (text: string) => {
 const initBackgroundColor = (buttonEl: HTMLButtonElement) => {
     const { className } = buttonEl;
     //背景颜色设置
-    className.includes('checked')
+    className.includes('tsai-checked')
         ? (buttonEl.style.backgroundColor = activeColor.value)
         : (buttonEl.style.backgroundColor = inactiveColor.value);
 };
@@ -141,9 +141,9 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
 };
 </script>
 <template>
-    <div class="switch">
+    <div class="tsai-switch-wrapper">
         <span v-if="inactiveText && !inlinePrompt">{{ inactiveText }}</span>
-        <button :class="{ checked, disabled }" @click="toggle" ref="buttonRef">
+        <button class="tsai-switch" :class="{'tsai-checked': checked, 'tsai-disabled':disabled }" @click="toggle" ref="buttonRef">
             <!--开始-->
             <span
                 v-show="checked && inactiveText && inlinePrompt"
@@ -178,11 +178,11 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
         transform: rotate(360deg);
     }
 }
-.switch {
+.tsai-switch-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    button {
+    .tsai-switch {
         height: @buttonH;
         width: @buttonH * 2;
         border: none;
@@ -190,10 +190,10 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
         border-radius: (@buttonH / 2);
         position: relative;
         transition: background-color 250ms;
-        &.checked > span {
+        &.tsai-checked > span {
             left: calc(100% - @spanH - 2px);
         }
-        &.checked {
+        &.tsai-checked {
             background: #3894ff;
         }
         &:focus {
@@ -202,10 +202,10 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
         &:hover {
             cursor: pointer;
         }
-        &.disabled {
+        &.tsai-disabled {
             opacity: 0.7;
         }
-        &.disabled:hover {
+        &.tsai-disabled:hover {
             cursor: not-allowed;
         }
     }

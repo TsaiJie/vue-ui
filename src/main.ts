@@ -3,6 +3,7 @@ import { createApp } from 'vue';
 // @ts-ignore
 import router from '@/router';
 import '@/index.less';
+
 import App from '@/App.vue';
 
 const app = createApp(App);
