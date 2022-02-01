@@ -4,7 +4,7 @@ import { ref } from 'vue';
 const checked = ref(true);
 const checked1 = ref(true);
 const beforeChange = () => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
         setTimeout(() => {
             return resolve(true);
         }, 1000);
@@ -105,7 +105,7 @@ const beforeChange2 = () => {
             :before-change="beforeChange"
             inline-prompt
         />
-        <hr/>
+        <hr />
         <Switch
             v-model:checked="checked1"
             active-text="开启"
