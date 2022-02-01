@@ -7,8 +7,15 @@ const click = () => {
 
 <template>
     <div>
-        <Button @click="click" size="111">你好</Button>
+        <Button @click="click">你好</Button>
+        <Button @click="click">你好</Button>
+        <Button @click="click" theme="link">你好</Button>
+        <Button @click="click" theme="text">你好</Button>
+        <Button @click="click">你好</Button>
+        <Button @click="click">你好</Button>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="less">
+
+</style>

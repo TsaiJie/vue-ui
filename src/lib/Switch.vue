@@ -167,7 +167,7 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
     <div>{{ checked }}</div>
 </template>
 
-<style scoped lang="less">
+<style lang="less">
 @buttonH: 22px;
 @spanH: @buttonH - 4px;
 @keyframes circle {
