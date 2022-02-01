@@ -31,25 +31,12 @@ onMounted(() => {
     console.log(activeText.value.length, inactiveText.value.length);
     const buttonEl = buttonRef.value;
     if (buttonEl) {
-        const { className } = buttonEl;
         const { value: inactiveTextValue } = inactiveText;
         const { value: activeTextValue } = activeText;
-        //背景颜色设置
-        className.includes('checked')
-            ? (buttonEl.style.backgroundColor = activeColor.value)
-            : (buttonEl.style.backgroundColor = inactiveColor.value);
-        // 如果有文字，文字间距设置
-        inactiveTextValue && activeTextValue
-            ? (buttonEl.style.margin = '0 5px')
-            : '';
-
-        inactiveTextValue && activeTextValue === ''
-            ? (buttonEl.style.marginLeft = '5px')
-            : '';
-
-        activeTextValue && inactiveTextValue === ''
-            ? (buttonEl.style.marginRight = '5px')
-            : '';
+        // 背景颜色设置
+        initBackgroundColor(buttonEl);
+        // 文本间距设置
+        initTextMargin(buttonEl, inactiveTextValue, activeTextValue);
     }
 });
 //监听checked的变化
@@ -58,21 +45,8 @@ watch(
     newValue => {
         const buttonEl = buttonRef.value;
         if (buttonEl) {
-            newValue
-                ? (buttonEl.style.backgroundColor = activeColor.value)
-                : (buttonEl.style.backgroundColor = inactiveColor.value);
-            const inactiveTextEl =
-                buttonEl.previousElementSibling as HTMLSpanElement;
-            const activeTextEl = buttonEl.nextElementSibling as HTMLSpanElement;
-
-            inactiveTextEl &&
-                (!newValue
-                    ? (inactiveTextEl.style.color = activeColor.value)
-                    : (inactiveTextEl.style.color = 'black'));
-            activeTextEl &&
-                (newValue
-                    ? (activeTextEl.style.color = activeColor.value)
-                    : (activeTextEl.style.color = 'black'));
+            changeBackground(newValue, buttonEl);
+            changeTextColor(buttonEl, newValue);
         }
     },
     { immediate: true }
@@ -82,6 +56,50 @@ const toggle = () => {
 };
 const handleTextLength = (text: string) => {
     return text.slice(0, 1);
+};
+//背景颜色设置
+const initBackgroundColor = (buttonEl: HTMLButtonElement) => {
+    const { className } = buttonEl;
+    //背景颜色设置
+    className.includes('checked')
+        ? (buttonEl.style.backgroundColor = activeColor.value)
+        : (buttonEl.style.backgroundColor = inactiveColor.value);
+};
+const initTextMargin = (
+    buttonEl: HTMLButtonElement,
+    inactiveTextValue: string,
+    activeTextValue: string
+) => {
+    // 如果有文字，文字间距设置
+    inactiveTextValue && activeTextValue
+        ? (buttonEl.style.margin = '0 5px')
+        : '';
+
+    inactiveTextValue && activeTextValue === ''
+        ? (buttonEl.style.marginLeft = '5px')
+        : '';
+
+    activeTextValue && inactiveTextValue === ''
+        ? (buttonEl.style.marginRight = '5px')
+        : '';
+};
+const changeBackground = (flag: boolean, buttonEl: HTMLButtonElement) => {
+    flag
+        ? (buttonEl.style.backgroundColor = activeColor.value)
+        : (buttonEl.style.backgroundColor = inactiveColor.value);
+};
+const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
+    const inactiveTextEl = buttonEl.previousElementSibling as HTMLSpanElement;
+    const activeTextEl = buttonEl.nextElementSibling as HTMLSpanElement;
+
+    inactiveTextEl &&
+        (!flag
+            ? (inactiveTextEl.style.color = activeColor.value)
+            : (inactiveTextEl.style.color = 'black'));
+    activeTextEl &&
+        (flag
+            ? (activeTextEl.style.color = activeColor.value)
+            : (activeTextEl.style.color = 'black'));
 };
 </script>
 <template>
