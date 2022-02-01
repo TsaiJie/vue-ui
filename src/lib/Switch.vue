@@ -9,6 +9,7 @@ interface SwitchProps {
     inlinePrompt?: boolean;
     disabled?: boolean;
     loading?: boolean;
+    beforeChange?: () => Promise<boolean>;
 }
 const props = withDefaults(defineProps<SwitchProps>(), {
     checked: false,
@@ -30,6 +31,7 @@ const {
     inlinePrompt,
     disabled,
     loading,
+    beforeChange,
 } = toRefs(props);
 const buttonRef = ref<HTMLButtonElement | null>(null);
 // 组件挂载
@@ -57,6 +59,37 @@ watch(
     { immediate: true }
 );
 const toggle = () => {
+    if (beforeChange && beforeChange.value instanceof Function) {
+        const buttonEl = buttonRef.value;
+        if (buttonEl) {
+            const loadingEl = buttonEl.querySelector(
+                '.icon-loading'
+            ) as HTMLElement;
+            const { className } = buttonEl;
+            buttonEl.className = `${className} disabled`;
+            loadingEl.style.display = 'inline-block';
+            const shouldToggle = beforeChange.value();
+            console.log(loadingEl);
+            shouldToggle
+                .then(result => {
+                    if (result) {
+                        loadingEl.style.display = 'none';
+                        buttonEl.className = `${className}`;
+                        handleChange();
+                    }
+                })
+                .catch(e => {
+                    loadingEl.style.display = 'none';
+                    buttonEl.className = `${className}`;
+                    console.error(e);
+                    alert('失败');
+                });
+        }
+    } else {
+        handleChange();
+    }
+};
+const handleChange = () => {
     !disabled.value && emits('update:checked', !checked.value);
 };
 const handleTextLength = (text: string) => {
@@ -119,7 +152,7 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
                 {{ handleTextLength(activeText) }}
             </span>
             <span class="circle">
-                <i class="iconfont icon-loading" v-if="loading"></i>
+                <i class="iconfont icon-loading" v-show="loading"></i>
             </span>
             <!--关闭-->
             <span
@@ -192,6 +225,5 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
             animation: circle infinite 1.5s linear;
         }
     }
-   
 }
 </style>
