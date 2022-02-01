@@ -6,6 +6,7 @@ interface SwitchProps {
     inactiveColor?: string;
     activeText?: string;
     inactiveText?: string;
+    inlinePrompt?: boolean;
 }
 const props = withDefaults(defineProps<SwitchProps>(), {
     checked: false,
@@ -13,13 +14,21 @@ const props = withDefaults(defineProps<SwitchProps>(), {
     inactiveColor: '#d7dae2',
     activeText: '',
     inactiveText: '',
+    inlinePrompt: false,
 });
 const emits = defineEmits(['update:checked']);
-const { checked, inactiveColor, activeColor, inactiveText, activeText } =
-    toRefs(props);
+const {
+    checked,
+    inactiveColor,
+    activeColor,
+    inactiveText,
+    activeText,
+    inlinePrompt,
+} = toRefs(props);
 const buttonRef = ref<HTMLButtonElement | null>(null);
 // 组件挂载
 onMounted(() => {
+    console.log(activeText.value.length, inactiveText.value.length);
     const buttonEl = buttonRef.value;
     if (buttonEl) {
         const { className } = buttonEl;
@@ -71,14 +80,31 @@ watch(
 const toggle = () => {
     emits('update:checked', !checked.value);
 };
+const handleTextLength = (text: string) => {
+    return text.slice(0, 1);
+};
 </script>
 <template>
     <div class="switch">
-        <span v-if="inactiveText" class="">{{ inactiveText }}</span>
+        <span v-if="inactiveText && !inlinePrompt">{{ inactiveText }}</span>
         <button :class="{ checked }" @click="toggle" ref="buttonRef">
+            <!--开始-->
+            <span
+                v-show="checked && inactiveText && inlinePrompt"
+                style="margin-left: -14px"
+            >
+                {{ handleTextLength(activeText) }}
+            </span>
             <span class="circle"></span>
+            <!--关闭-->
+            <span
+                v-show="!checked && inactiveText && inlinePrompt"
+                style="margin-right: -14px"
+            >
+                {{ handleTextLength(inactiveText) }}
+            </span>
         </button>
-        <span v-if="activeText">{{ activeText }}</span>
+        <span v-if="activeText && !inlinePrompt">{{ activeText }}</span>
     </div>
     <div>{{ checked }}</div>
 </template>

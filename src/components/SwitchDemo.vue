@@ -6,20 +6,27 @@ const checked = ref(true);
 <template>
     <div>
         <Switch v-model:checked="checked" />
-        <hr/>
+        <hr />
         <Switch
             v-model:checked="checked"
             active-color="#13ce66"
             inactive-color="#ff4949" />
-        <hr/>
+        <hr />
         <Switch
             v-model:checked="checked"
             active-text="Open"
             active-color="#13ce66"
             inactive-color="#ff4949" />
-        <hr/>
+        <hr />
         <Switch
             v-model:checked="checked"
+            inactive-text="Close"
+            active-color="#13ce66"
+            inactive-color="#ff4949" />
+        <hr />
+        <Switch
+            v-model:checked="checked"
+            active-text="Open"
             inactive-text="Close"
             active-color="#13ce66"
             inactive-color="#ff4949" />
@@ -29,7 +36,16 @@ const checked = ref(true);
             active-text="Open"
             inactive-text="Close"
             active-color="#13ce66"
-            inactive-color="#ff4949" />
+            inactive-color="#ff4949"
+            inline-prompt />
+        <hr>
+        <Switch
+            v-model:checked="checked"
+            active-text="开启"
+            inactive-text="关闭"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            inline-prompt />
     </div>
 </template>
 

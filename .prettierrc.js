@@ -17,5 +17,5 @@ module.exports = {
     // prettier 单行超出最大长度自动折行
     proseWrap: 'always',
     vueIndentScriptAndStyle: false,
-    bracketSameLine: true,
+    bracketSameLine: false,
 };
