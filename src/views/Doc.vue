@@ -46,7 +46,7 @@ const asideVisible = inject<Ref<boolean>>('asideVisible');
         padding-left: 156px;
         > .main {
             flex-grow: 1;
-            background: lightgreen;
+            background: #ffffff;
             padding: 16px;
             overflow: auto;
         }
