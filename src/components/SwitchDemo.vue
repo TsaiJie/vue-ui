@@ -6,7 +6,7 @@ const checked = ref(true);
 </script>
 <template>
     <div>
-        <Switch v-model:checked="checked"  />
+        <Switch v-model:checked="checked" />
     </div>
 </template>
 

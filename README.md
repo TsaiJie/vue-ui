@@ -7,12 +7,151 @@
 1. 使用`inject`和`provide`完成属性的透传，后代组件可以改变这个属性的值，更改完，使用到这个属性的组件都会进行更新。
 2. `react`中使用的是`context`实现的，但是有些不一样，`react`中的属性和修改这个属性的方法必须同时传递过来，然后进行修改。
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## vue3组件通信（v3.2.25）
 
-## Recommended IDE Setup
+`defineProps` `defineEmits` `withDefaults` 这些函数不用再导入了。
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+1. `defineProps` 是用来接收props的。**注意接收来的属性最好不要直接解构！！！**。
 
-## Type Support For `.vue` Imports in TS
+   ```js
+   //bad 这样使用会断开响应式
+   const { count } =  defineProps({
+       count: {
+           type: Number,
+           required: true,
+       },
+   }); 
+   
+   //good
+   const props =  defineProps({
+       count: {
+           type: Number,
+           required: true,
+       },
+   }); 
+   // 这样可以保持响应式，如果需要解构的话要使用toRefs，不使用toRefs的话，也可以直接使用props.count
+   const { count } = toRefs(props);
+   ```
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+   1. `defineProps` 两种写法，第一种传统的vue写法，限制类型并且设置默认值是否必须传入等。
+
+      ```js
+      const { count } =  defineProps({
+          count: {
+              type: Number,
+              required: true,
+          },
+      }); 
+      const { count } = toRefs(props);
+      ```
+
+      
+
+   2. 第二种ts写法， 借助 withDefaults来设置默认值，使用ts限制类型。
+
+      ```js
+      const props = withDefaults(defineProps<{ count: number }>(), {
+          count: 0,
+      });
+      const { count } = toRefs(props);
+      ```
+
+2. `defineEmits`是用来触发自定义函数的相当于（v2）中的`this.$emit()`。
+3. `withDefaults` 是用来配置属性默认值的。
+
+#### 1 第一种 使用传统的自定义函数来进行通信
+
+```vue
+// 父组件
+<script setup lang="ts">
+import { ref } from 'vue';
+import Child from './components/Child.vue';
+const count = ref(0);
+const changeCount = (p:number) => {
+    count.value = p;
+}
+</script>
+
+<template>
+     <Child :count="count" @changeCount ="changeCount"/>
+</template>
+```
+
+```vue
+// 子组件
+<script setup lang="ts">
+import { toRefs } from 'vue';
+// 接收参数使用
+const props = defineProps({
+    count: {
+        type: Number,
+        required: true,
+    },
+});
+
+const { count } = toRefs(props);
+// 接收事件
+const emmits = defineEmits(['changeCount']);
+
+const change = () => {
+     emits('changeCount', count.value++);
+};
+</script>
+
+<template>
+    <h1>{{ count }}</h1>
+    <button @click="change">+1</button>
+</template>
+
+
+```
+
+#### 2 第二种 使用update进行通信
+```vue
+// 父组件
+...
+<template>
+     <Child :count="count" @update:count ="changeCount"/>
+</template>
+```
+
+```vue
+// 子组件
+<script setup lang="ts">
+...
+// 这样来接收事件
+const emmits = defineEmits(['update:count']);
+
+const change = () => {
+     emits('update:count', count.value++);
+};
+</script>
+
+```
+
+#### 3 第三种 使用v-model进行通信
+
+```vue
+// 父组件 这样写 子组件是第二种update的方式
+...
+<template>
+     <Child v-model:count="count"/>
+</template>
+```
+
+####  ts踩坑
+
+如果使用了`eslint`可能会出现报错，
+
+1. 解决`defineProps` `defineEmits` `withDefaults`不引入直接使用会报错
+2. 解决`v-model:count="count"`报错`'v-model' directives require no argument.(vue/no-v-model-argument)`
+
+```js
+env: {
+    'vue/setup-compiler-macros': true,
+},
+rules: {
+    'vue/no-v-model-argument': 'off',
+ }
+```
+

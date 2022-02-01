@@ -3,6 +3,7 @@ module.exports = {
     env: {
         browser: true,
         es2021: true,
+        'vue/setup-compiler-macros': true,
     },
     extends: [
         'eslint:recommended',
@@ -24,6 +25,5 @@ module.exports = {
         semi: ['error', 'always'],
         'vue/no-multiple-template-root': 'off',
         'vue/multi-word-component-names': 0,
-
     },
 };
