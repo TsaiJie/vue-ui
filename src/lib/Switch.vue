@@ -7,6 +7,8 @@ interface SwitchProps {
     activeText?: string;
     inactiveText?: string;
     inlinePrompt?: boolean;
+    disabled?: boolean;
+    loading?: boolean;
 }
 const props = withDefaults(defineProps<SwitchProps>(), {
     checked: false,
@@ -15,6 +17,8 @@ const props = withDefaults(defineProps<SwitchProps>(), {
     activeText: '',
     inactiveText: '',
     inlinePrompt: false,
+    disabled: false,
+    loading: false,
 });
 const emits = defineEmits(['update:checked']);
 const {
@@ -24,11 +28,12 @@ const {
     inactiveText,
     activeText,
     inlinePrompt,
+    disabled,
+    loading,
 } = toRefs(props);
 const buttonRef = ref<HTMLButtonElement | null>(null);
 // 组件挂载
 onMounted(() => {
-    console.log(activeText.value.length, inactiveText.value.length);
     const buttonEl = buttonRef.value;
     if (buttonEl) {
         const { value: inactiveTextValue } = inactiveText;
@@ -52,7 +57,7 @@ watch(
     { immediate: true }
 );
 const toggle = () => {
-    emits('update:checked', !checked.value);
+    !disabled.value && emits('update:checked', !checked.value);
 };
 const handleTextLength = (text: string) => {
     return text.slice(0, 1);
@@ -105,7 +110,7 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
 <template>
     <div class="switch">
         <span v-if="inactiveText && !inlinePrompt">{{ inactiveText }}</span>
-        <button :class="{ checked }" @click="toggle" ref="buttonRef">
+        <button :class="{ checked, disabled }" @click="toggle" ref="buttonRef">
             <!--开始-->
             <span
                 v-show="checked && inactiveText && inlinePrompt"
@@ -113,7 +118,9 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
             >
                 {{ handleTextLength(activeText) }}
             </span>
-            <span class="circle"></span>
+            <span class="circle">
+                <i class="iconfont icon-loading" v-if="loading"></i>
+            </span>
             <!--关闭-->
             <span
                 v-show="!checked && inactiveText && inlinePrompt"
@@ -130,6 +137,14 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
 <style scoped lang="less">
 @buttonH: 22px;
 @spanH: @buttonH - 4px;
+@keyframes circle {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 .switch {
     position: relative;
     display: flex;
@@ -138,9 +153,10 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
         height: @buttonH;
         width: @buttonH * 2;
         border: none;
-        background: #d7dae2;
+        background-color: #d7dae2;
         border-radius: (@buttonH / 2);
         position: relative;
+        transition: background-color 250ms;
         &.checked > span {
             left: calc(100% - @spanH - 2px);
         }
@@ -150,8 +166,18 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
         &:focus {
             outline: none;
         }
+        &:hover {
+            cursor: pointer;
+        }
+        &.disabled {
+            opacity: 0.7;
+        }
+        &.disabled:hover {
+            cursor: not-allowed;
+        }
     }
     .circle {
+        display: flex;
         position: absolute;
         top: 2px;
         left: 2px;
@@ -160,6 +186,12 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
         width: @spanH;
         border-radius: (@spanH / 2);
         transition: left 250ms;
+        justify-content: center;
+        align-items: center;
+        .icon-loading {
+            animation: circle infinite 1.5s linear;
+        }
     }
+   
 }
 </style>
