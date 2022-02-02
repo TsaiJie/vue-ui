@@ -13,7 +13,9 @@ const toggleAside = () => {
             <router-link to="/">首页</router-link>
             <li>菜单2</li>
         </ul>
-        <span class="toggleAsideButton" @click="toggleAside"></span>
+        <span class="toggleAsideButton" @click="toggleAside">
+            <i class="iconfont iconfont-menu">&#xe655;</i>
+        </span>
     </div>
 </template>
 
@@ -48,8 +50,6 @@ const toggleAside = () => {
     }
 
     > .toggleAsideButton {
-        display: none;
-        background: red;
         width: 24px;
         height: 24px;
         position: absolute;
@@ -59,6 +59,9 @@ const toggleAside = () => {
 
         &:hover {
             cursor: pointer;
+        }
+        > .iconfont-menu {
+            font-size: 30px;
         }
     }
 
@@ -73,7 +76,9 @@ const toggleAside = () => {
         }
 
         > .toggleAsideButton {
-            display: inline-block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

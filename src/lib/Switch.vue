@@ -152,7 +152,7 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
                 {{ handleTextLength(activeText) }}
             </span>
             <span class="circle">
-                <i class="iconfont icon-loading" v-show="loading"></i>
+                <i class="iconfont icon-loading" v-show="loading">&#xe756;</i>
             </span>
             <!--关闭-->
             <span
