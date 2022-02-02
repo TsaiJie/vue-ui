@@ -11,13 +11,15 @@ interface ButtonProps {
     theme?: string;
     size?: string;
     level?: string;
+    disabled?: boolean;
 }
 const props = withDefaults(defineProps<ButtonProps>(), {
     theme: 'default',
     size: 'normal',
     level: 'default',
+    disabled: false,
 });
-const { theme, size, level } = toRefs(props);
+const { theme, size, level, disabled } = toRefs(props);
 const attrs = useAttrs();
 const { ...rest } = attrs;
 const classes = computed(() => {
@@ -30,7 +32,12 @@ const classes = computed(() => {
 </script>
 
 <template>
-    <button v-bind="rest" class="tsai-button" :class="classes">
+    <button
+        v-bind="rest"
+        class="tsai-button"
+        :class="classes"
+        :disabled="disabled"
+    >
         <slot></slot>
     </button>
 </template>
@@ -55,7 +62,7 @@ const classes = computed(() => {
     align-items: center;
     white-space: nowrap;
     background-color: white;
-    color: @color;
+    color: @defaultColor;
     border: 1px solid @border-color;
     border-radius: @radius;
     box-shadow: 0 1px 0 fade-out(black, 0.95);
@@ -74,6 +81,13 @@ const classes = computed(() => {
         border: 0;
     }
     &.tsai-theme-default {
+        &[disabled] {
+            cursor: not-allowed;
+            color: grey;
+            &:hover {
+                border-color: @border-color;
+            }
+        }
         &.tsai-level-primary {
             background-color: @blue;
             color: white;
@@ -83,6 +97,12 @@ const classes = computed(() => {
                 background-color: darken(@blue, 10%);
                 border-color: darken(@blue, 10%);
             }
+            &[disabled] {
+                cursor: not-allowed;
+                background-color: lighten(@blue, 20%);
+                border-color: lighten(@blue, 20%);
+            }
+
         }
         &.tsai-level-danger {
             background-color: @dangerColor;
@@ -92,6 +112,11 @@ const classes = computed(() => {
             &:focus {
                 background-color: darken(@dangerColor, 10%);
                 border-color: darken(@dangerColor, 10%);
+            }
+            &[disabled] {
+                cursor: not-allowed;
+                background-color: lighten(@dangerColor, 20%);
+                border-color: lighten(@dangerColor, 20%);
             }
         }
         &.tsai-level-success {
@@ -103,6 +128,11 @@ const classes = computed(() => {
                 background-color: darken(@successColor, 10%);
                 border-color: darken(@successColor, 10%);
             }
+            &[disabled] {
+                cursor: not-allowed;
+                background-color: lighten(@successColor, 20%);
+                border-color: lighten(@successColor, 20%);
+            }
         }
         &.tsai-level-warning {
             background-color: @warningColor;
@@ -113,9 +143,15 @@ const classes = computed(() => {
                 background-color: darken(@warningColor, 10%);
                 border-color: darken(@warningColor, 10%);
             }
+            &[disabled] {
+                cursor: not-allowed;
+                background-color: lighten(@warningColor, 20%);
+                border-color: lighten(@warningColor, 20%);
+            }
         }
     }
     &.tsai-theme-link {
+  
         border-color: transparent;
         box-shadow: none;
         &.tsai-level-default {
@@ -151,6 +187,14 @@ const classes = computed(() => {
             &:hover,
             &:focus {
                 color: darken(@warningColor, 15%);
+            }
+        }
+        &[disabled] {
+            cursor: not-allowed;
+            color: grey;
+            &:hover,
+            &:focus {
+                color: grey;
             }
         }
     }
@@ -194,6 +238,15 @@ const classes = computed(() => {
                 background-color: lighten(@warningColor, 30%);
             }
         }
+        &[disabled] {
+            cursor: not-allowed;
+            color: grey;
+            &:hover,
+            &:focus {
+                color: grey;
+                background-color: transparent;
+            }
+        }
     }
     &.tsai-size-big {
         font-size: 24px;
@@ -205,6 +258,5 @@ const classes = computed(() => {
         height: 20px;
         padding: 0 4px;
     }
-
 }
 </style>

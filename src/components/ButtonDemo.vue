@@ -10,12 +10,15 @@ const click = () => {
         <div>
             <h2>示例一</h2>
             <Button @click="click">你好</Button>
+            <Button @click="click" disabled>你好</Button>
             <Button @click="click" size="small">你好</Button>
             <Button @click="click" size="big">你好</Button>
             <Button @click="click" size="big" level="primary">主要按钮</Button>
             <Button @click="click" size="big" level="success">成功按钮</Button>
             <Button @click="click" size="big" level="danger">危险按钮</Button>
-            <Button @click="click" size="big" level="warning">警告按钮</Button>
+            <Button @click="click" level="warning" disabled>警告按钮</Button>
+            <Button @click="click" level="primary" disabled>主要按钮</Button>
+            <Button @click="click" level="danger" disabled>危险按钮</Button>
         </div>
         <div>
             <h2>示例二</h2>
@@ -36,7 +39,12 @@ const click = () => {
             <Button @click="click" theme="text" level="warning">你好</Button>
             <Button @click="click" theme="text" size="small">你好</Button>
             <Button @click="click" theme="text" size="big">你好</Button>
-
+        </div>
+        <div>
+            <h2>示例四</h2>
+            <Button disabled>禁用按钮</Button>
+            <Button theme="link" disabled>禁用链接按钮</Button>
+            <Button theme="text" disabled>禁用按钮</Button>
         </div>
     </div>
 </template>
