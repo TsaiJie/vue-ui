@@ -12,22 +12,33 @@ const click = () => {
             <Button @click="click">你好</Button>
             <Button @click="click" size="small">你好</Button>
             <Button @click="click" size="big">你好</Button>
+            <Button @click="click" size="big" level="primary">主要按钮</Button>
+            <Button @click="click" size="big" level="success">成功按钮</Button>
+            <Button @click="click" size="big" level="danger">危险按钮</Button>
+            <Button @click="click" size="big" level="warning">警告按钮</Button>
         </div>
         <div>
             <h2>示例二</h2>
             <Button @click="click" theme="link">你好</Button>
+            <Button @click="click" theme="link" level="primary">你好</Button>
+            <Button @click="click" theme="link" level="success">你好</Button>
+            <Button @click="click" theme="link" level="danger">你好</Button>
+            <Button @click="click" theme="link" level="warning">你好</Button>
             <Button @click="click" theme="link" size="small">你好</Button>
             <Button @click="click" theme="link" size="big">你好</Button>
         </div>
         <div>
             <h2>示例三</h2>
             <Button @click="click" theme="text">你好</Button>
+            <Button @click="click" theme="text" level="primary">你好</Button>
+            <Button @click="click" theme="text" level="success">你好</Button>
+            <Button @click="click" theme="text" level="danger">你好</Button>
+            <Button @click="click" theme="text" level="warning">你好</Button>
             <Button @click="click" theme="text" size="small">你好</Button>
             <Button @click="click" theme="text" size="big">你好</Button>
 
         </div>
     </div>
-
 </template>
 
 <style scoped lang="less"></style>
