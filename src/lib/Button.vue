@@ -6,24 +6,28 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { toRefs, useAttrs } from 'vue';
+import { computed, toRefs, useAttrs } from 'vue';
 interface ButtonProps {
     theme?: string;
+    size?: string;
 }
 const props = withDefaults(defineProps<ButtonProps>(), {
     theme: 'default',
+    size: 'normal',
 });
-const { theme } = toRefs(props);
+const { theme, size } = toRefs(props);
 const attrs = useAttrs();
 const { ...rest } = attrs;
+const classes = computed(() => {
+    return {
+        [`tsai-theme-${theme.value}`]: theme.value,
+        [`tsai-size-${size.value}`]: size.value,
+    };
+});
 </script>
 
 <template>
-    <button
-        v-bind="rest"
-        class="tsai-button"
-        :class="{ [`tsai-theme-${theme}`]: theme }"
-    >
+    <button v-bind="rest" class="tsai-button" :class="classes">
         <slot></slot>
     </button>
 </template>
@@ -79,6 +83,16 @@ const { ...rest } = attrs;
         &:focus {
             background-color: darken(white, 5%);
         }
+    }
+    &.tsai-size-big {
+        font-size: 24px;
+        height: 48px;
+        padding: 0 16px;
+    }
+    &.tsai-size-small {
+        font-size: 12px;
+        height: 20px;
+        padding: 0 4px;
     }
 }
 </style>
