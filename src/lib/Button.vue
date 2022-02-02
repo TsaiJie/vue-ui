@@ -14,7 +14,6 @@ const props = withDefaults(defineProps<ButtonProps>(), {
     theme: 'default',
 });
 const { theme } = toRefs(props);
-console.log(props);
 const attrs = useAttrs();
 const { ...rest } = attrs;
 </script>
@@ -62,6 +61,24 @@ const { ...rest } = attrs;
     }
     &::-moz-focus-inner {
         border: 0;
+    }
+    &.tsai-theme-link {
+        border-color: transparent;
+        box-shadow: none;
+        color: @blue;
+        &:hover,
+        &:focus {
+            color: lighten(@blue, 20%);
+        }
+    }
+    &.tsai-theme-text {
+        border-color: transparent;
+        box-shadow: none;
+        color: inherit;
+        &:hover,
+        &:focus {
+            background-color: darken(white, 5%);
+        }
     }
 }
 </style>
