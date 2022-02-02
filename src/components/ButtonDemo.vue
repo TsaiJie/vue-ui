@@ -46,6 +46,10 @@ const click = () => {
             <Button theme="link" disabled>禁用链接按钮</Button>
             <Button theme="text" disabled>禁用按钮</Button>
         </div>
+        <div>
+            <Button @click="click"  loading>加载中</Button>
+            <Button @click="click" >加载完毕</Button>
+        </div>
     </div>
 </template>
 

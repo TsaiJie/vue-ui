@@ -12,14 +12,16 @@ interface ButtonProps {
     size?: string;
     level?: string;
     disabled?: boolean;
+    loading?: boolean;
 }
 const props = withDefaults(defineProps<ButtonProps>(), {
     theme: 'default',
     size: 'normal',
     level: 'default',
     disabled: false,
+    loading: false,
 });
-const { theme, size, level, disabled } = toRefs(props);
+const { theme, size, level, disabled, loading } = toRefs(props);
 const attrs = useAttrs();
 const { ...rest } = attrs;
 const classes = computed(() => {
@@ -38,6 +40,7 @@ const classes = computed(() => {
         :class="classes"
         :disabled="disabled"
     >
+        <span class="loading" v-if="loading"></span>
         <slot></slot>
     </button>
 </template>
@@ -102,7 +105,6 @@ const classes = computed(() => {
                 background-color: lighten(@blue, 20%);
                 border-color: lighten(@blue, 20%);
             }
-
         }
         &.tsai-level-danger {
             background-color: @dangerColor;
@@ -151,7 +153,6 @@ const classes = computed(() => {
         }
     }
     &.tsai-theme-link {
-  
         border-color: transparent;
         box-shadow: none;
         &.tsai-level-default {
@@ -257,6 +258,25 @@ const classes = computed(() => {
         font-size: 12px;
         height: 20px;
         padding: 0 4px;
+    }
+    > .loading {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        margin-right: 4px;
+        border-radius: 8px;
+        border-color: @blue @blue @blue transparent;
+        border-style: solid;
+        border-width: 2px;
+        animation: spin 1s infinite linear;
+    }
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 }
 </style>
