@@ -32,7 +32,7 @@ const click = () => {
         </div>
         <div>
             <h2>示例三</h2>
-            <Button @click="click" theme="text">你好</Button>
+            <Button @click="click" theme="text" xxx="hhh">你好</Button>
             <Button @click="click" theme="text" level="primary">你好</Button>
             <Button @click="click" theme="text" level="success">你好</Button>
             <Button @click="click" theme="text" level="danger">你好</Button>

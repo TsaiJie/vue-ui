@@ -23,7 +23,9 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 });
 const { theme, size, level, disabled, loading } = toRefs(props);
 const attrs = useAttrs();
+
 const { ...rest } = attrs;
+console.log(rest)
 const classes = computed(() => {
     return {
         [`tsai-theme-${theme.value}`]: theme.value,

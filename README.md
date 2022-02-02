@@ -155,3 +155,33 @@ rules: {
  }
 ```
 
+### vue3 setup如何使用 `inheritAttrs`以及如何获取`$attrs`
+1. `<script setup>` 可以和普通的 `<script>` 一起使用。普通的 `<script>` 在有这些需要的情况下或许会被使用到：
+无法在 `<script setup>` 声明的选项，例如 `inheritAttrs` 或通过插件启用的自定义的选项。
+
+
+2. `vue3`默认所有的属性都绑定在根元素上，`inheritAttrs` 可以取消默认绑定，使用`useAttrs()`可以获取所有的属性。`useAttrs()` 和 `props`的区别：`props`需要声明之后才能取值，并且不包含事件，在`props`中声明过的属性不会再`useAttrs()`中出现。
+
+
+```vue
+<script lang="ts">
+// 普通 <script>, 在模块范围下执行(只执行一次)
+// 声明额外的选项
+export default {
+    inheritAttrs: false, 
+    customOptions: {}
+}
+</script>
+<script setup lang="ts">
+import {  useAttrs } from 'vue';
+// 在 setup() 作用域中执行 (对每个实例皆如此)
+// 获取默认原生传入的attrs
+const attrs = useAttrs();
+const { ...rest } = attrs;
+</script>
+<!--绑定属性-->
+<button v-bind="rest"></button>>
+```
+
+
+
