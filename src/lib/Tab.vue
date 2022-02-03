@@ -3,7 +3,9 @@
 </script>
 
 <template>
-<div>Tab组件</div>
+<div>
+	<slot></slot>
+</div>
 </template>
 
 <style scoped>

@@ -8,11 +8,16 @@ defaultSlots?.forEach(tag => {
     if (tag.type !== Tab) {
         throw new Error('Tabs 的子组件必须是Tab');
     }
+    
 });
 </script>
 
 <template>
-<slot></slot>
+<div>
+	<div v-for="c in defaultSlots" :key="c">{{c.props?.title}}</div>
+	<component v-for="c in defaultSlots" :is="c" :key="c"></component>
+</div>
+
 </template>
 
 <style scoped></style>
