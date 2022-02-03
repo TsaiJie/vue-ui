@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import Dialog from '@/lib/Dialog.vue';
 import Button from '@/lib/Button.vue';
-import { ref, watch } from 'vue';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import openDialog from '@/lib/openDialog';
+import {h, ref, watch} from 'vue';
 const visible = ref(false);
 const visible1 = ref(false);
 watch(visible, () => {
@@ -14,7 +17,13 @@ const handleCancel = () => {
     return false;
 };
 const showDialog = () => {
-    // openDialog({});
+    openDialog({
+        title: h('strong', '我是大标题'),
+        content: '我是内容',
+        ok: handleOk,
+        cancel: handleCancel,
+        closeOnClickOverlay: true
+    });
 };
 </script>
 
