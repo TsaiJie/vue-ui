@@ -50,6 +50,7 @@ const toggleAside = () => {
     }
 
     > .toggleAsideButton {
+        display: none;
         width: 24px;
         height: 24px;
         position: absolute;

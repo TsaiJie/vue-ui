@@ -1,22 +1,57 @@
 <script lang="ts" setup>
 import Button from './Button.vue';
+import { toRefs } from 'vue';
+interface DialogProps {
+    visible: boolean;
+    closeOnClickOverlay?: boolean;
+    ok?: () => boolean;
+    cancel?: () => boolean;
+}
+const props = withDefaults(defineProps<DialogProps>(), {
+    visible: false,
+    closeOnClickOverlay: false,
+});
+const { visible, closeOnClickOverlay } = toRefs(props);
+const emits = defineEmits(['update:visible']);
+const handleClose = () => {
+    emits('update:visible', !visible.value);
+};
+const handleCloseOnClickOverlay = () => {
+    closeOnClickOverlay.value && handleClose();
+};
+const handleCancel = () => {
+    // props.cancel && props.cancel() && handleClose();
+    props.cancel?.() && handleClose();
+};
+const handleOk = () => {
+    // props.ok && props.ok() && handleClose();
+    props.ok?.() && handleClose();
+};
 </script>
 
 <template>
-    <div class="tsai-dialog-overlay"></div>
-    <div class="tsai-dialog-wrapper">
-        <div class="tsai-dialog">
-            <header>标题<span class="tsai-dialog-close"></span></header>
-            <main>
-                <p>111</p>
-                <p>222</p>
-            </main>
-            <footer>
-                <Button level="primary">OK</Button>
-                <Button>Cancel</Button>
-            </footer>
+    <template v-if="visible">
+        <div
+            class="tsai-dialog-overlay"
+            @click="handleCloseOnClickOverlay"
+        ></div>
+        <div class="tsai-dialog-wrapper">
+            <div class="tsai-dialog">
+                <header>
+                    标题
+                    <span class="tsai-dialog-close" @click="handleClose"></span>
+                </header>
+                <main>
+                    <p>111</p>
+                    <p>222</p>
+                </main>
+                <footer>
+                    <Button level="primary" @click="handleOk">OK</Button>
+                    <Button @click="handleCancel">Cancel</Button>
+                </footer>
+            </div>
         </div>
-    </div>
+    </template>
 </template>
 
 <style lang="less" scoped>
@@ -76,10 +111,10 @@ import Button from './Button.vue';
             top: 50%;
             left: 50%;
         }
-        &::before{
+        &::before {
             transform: translate(-50%, -50%) rotate(-45deg);
         }
-        &::after{
+        &::after {
             transform: translate(-50%, -50%) rotate(45deg);
         }
     }
