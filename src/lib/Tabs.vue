@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, toRefs, useSlots, watch } from 'vue';
+import { computed, toRefs, useSlots, onMounted, reactive, ref } from 'vue';
 import Tab from './Tab.vue';
 interface TabsProps {
     selected: string;
@@ -7,6 +7,8 @@ interface TabsProps {
 const props = withDefaults(defineProps<TabsProps>(), {
     selected: '',
 });
+const navItems = reactive<HTMLDivElement[]>([]);
+const indicatorRef = ref<HTMLDivElement | null>(null);
 const { selected } = toRefs(props);
 const emits = defineEmits(['update:selected']);
 //获取slots
@@ -16,6 +18,15 @@ defaultSlots?.forEach(tag => {
     if (tag.type !== Tab) {
         throw new Error('Tabs 的子组件必须是Tab');
     }
+});
+
+onMounted(() => {
+    const result = navItems.filter(nav =>
+        nav.classList.contains('selected')
+    )[0];
+    const { width } = result.getBoundingClientRect();
+    console.log( indicatorRef.value);
+    indicatorRef.value && (indicatorRef.value.style.width = width + 'px');
 });
 const current = computed(
     () => defaultSlots?.filter(item => item.props?.title === selected.value)[0]
@@ -30,13 +41,19 @@ const handClick = (title: string) => {
 	<div class="tsai-tabs-nav">
 		<div
 			class="tsai-tabs-nav-item"
+			v-for="(item, i) in defaultSlots"
 			:class="{ selected: item.props?.title === selected }"
-			v-for="item in defaultSlots"
 			:key="item"
 			@click="handClick(item.props?.title)"
+			:ref="
+				el => {
+					if (el) navItems[i] = el;
+				}
+			"
 		>
 			{{ item.props?.title }}
 		</div>
+		<div class="tsai-tabs-nav-indicator" ref="indicatorRef"></div>
 	</div>
 	<div class="tsai-tabs-content">
 		<component
@@ -57,6 +74,7 @@ const handClick = (title: string) => {
         display: flex;
         color: @color;
         border-bottom: 1px solid @border-color;
+        position: relative;
         &-item {
             padding: 8px 0;
             margin: 0 16px;
@@ -67,6 +85,14 @@ const handClick = (title: string) => {
             &.selected {
                 color: @blue;
             }
+        }
+        &-indicator {
+            position: absolute;
+            height: 3px;
+            width: 100px;
+            background-color: @blue;
+            left: 0;
+            bottom: -1px;
         }
     }
     &-content {
