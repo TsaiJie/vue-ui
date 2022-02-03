@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, toRefs, useSlots, onMounted, reactive, ref } from 'vue';
+import {computed, toRefs, useSlots, ref, watchEffect, onMounted} from 'vue';
 import Tab from './Tab.vue';
 interface TabsProps {
     selected: string;
@@ -7,8 +7,10 @@ interface TabsProps {
 const props = withDefaults(defineProps<TabsProps>(), {
     selected: '',
 });
-const navItems = reactive<HTMLDivElement[]>([]);
+const selectedItem = ref<HTMLDivElement | null>(null);
 const indicatorRef = ref<HTMLDivElement | null>(null);
+const containerRef = ref<HTMLDivElement | null>(null);
+
 const { selected } = toRefs(props);
 const emits = defineEmits(['update:selected']);
 //获取slots
@@ -20,36 +22,41 @@ defaultSlots?.forEach(tag => {
     }
 });
 
-onMounted(() => {
-    const result = navItems.filter(nav =>
-        nav.classList.contains('selected')
-    )[0];
-    const { width } = result.getBoundingClientRect();
-    console.log( indicatorRef.value);
-    indicatorRef.value && (indicatorRef.value.style.width = width + 'px');
-});
 const current = computed(
     () => defaultSlots?.filter(item => item.props?.title === selected.value)[0]
 );
 const handClick = (title: string) => {
     emits('update:selected', title);
 };
+watchEffect(() => {
+
+    if (indicatorRef.value && containerRef.value && selectedItem.value) {
+        const { width, left: resultLeft } =
+            selectedItem.value.getBoundingClientRect();
+        const { left: containerLeft } =
+            containerRef.value.getBoundingClientRect();
+        const left = resultLeft - containerLeft;
+        indicatorRef.value.style.width = width + 'px';
+        indicatorRef.value.style.left = left + 'px';
+    }
+});
 </script>
 
 <template>
 <div class="tsai-tabs">
-	<div class="tsai-tabs-nav">
+	<div class="tsai-tabs-nav" ref="containerRef">
 		<div
 			class="tsai-tabs-nav-item"
-			v-for="(item, i) in defaultSlots"
+			v-for="item in defaultSlots"
 			:class="{ selected: item.props?.title === selected }"
 			:key="item"
-			@click="handClick(item.props?.title)"
 			:ref="
 				el => {
-					if (el) navItems[i] = el;
+					if (el && item.props?.title === selected)
+						selectedItem = el;
 				}
 			"
+			@click="handClick(item.props?.title)"
 		>
 			{{ item.props?.title }}
 		</div>
@@ -93,6 +100,7 @@ const handClick = (title: string) => {
             background-color: @blue;
             left: 0;
             bottom: -1px;
+            transition: all 250ms;
         }
     }
     &-content {
