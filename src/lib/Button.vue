@@ -35,15 +35,15 @@ const classes = computed(() => {
 </script>
 
 <template>
-    <button
-        v-bind="rest"
-        class="tsai-button"
-        :class="classes"
-        :disabled="disabled"
-    >
-        <span class="loading" v-if="loading"></span>
-        <slot></slot>
-    </button>
+<button
+	v-bind="rest"
+	class="tsai-button"
+	:class="classes"
+	:disabled="disabled"
+>
+	<span class="loading" v-if="loading"></span>
+	<slot></slot>
+</button>
 </template>
 
 <style lang="less">

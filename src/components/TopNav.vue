@@ -7,16 +7,16 @@ const toggleAside = () => {
 };
 </script>
 <template>
-    <div class="top-nav">
-        <div class="logo">LOGO</div>
-        <ul class="menu">
-            <router-link to="/">首页</router-link>
-            <li>菜单2</li>
-        </ul>
-        <span class="toggleAsideButton" @click="toggleAside">
-            <i class="iconfont iconfont-menu">&#xe655;</i>
-        </span>
-    </div>
+<div class="top-nav">
+	<div class="logo">LOGO</div>
+	<ul class="menu">
+		<router-link to="/">首页</router-link>
+		<li>菜单2</li>
+	</ul>
+	<span class="toggleAsideButton" @click="toggleAside">
+		<i class="iconfont iconfont-menu">&#xe655;</i>
+	</span>
+</div>
 </template>
 
 <style scoped lang="less">

@@ -141,30 +141,30 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
 };
 </script>
 <template>
-    <div class="tsai-switch-wrapper">
-        <span v-if="inactiveText && !inlinePrompt">{{ inactiveText }}</span>
-        <button class="tsai-switch" :class="{'tsai-checked': checked, 'tsai-disabled':disabled }" @click="toggle" ref="buttonRef">
-            <!--开始-->
-            <span
-                v-show="checked && inactiveText && inlinePrompt"
-                style="margin-left: -14px"
-            >
-                {{ handleTextLength(activeText) }}
-            </span>
-            <span class="circle">
-                <i class="iconfont icon-loading" v-show="loading">&#xe756;</i>
-            </span>
-            <!--关闭-->
-            <span
-                v-show="!checked && inactiveText && inlinePrompt"
-                style="margin-right: -14px"
-            >
-                {{ handleTextLength(inactiveText) }}
-            </span>
-        </button>
-        <span v-if="activeText && !inlinePrompt">{{ activeText }}</span>
-    </div>
-    <div>{{ checked }}</div>
+<div class="tsai-switch-wrapper">
+	<span v-if="inactiveText && !inlinePrompt">{{ inactiveText }}</span>
+	<button class="tsai-switch" :class="{'tsai-checked': checked, 'tsai-disabled':disabled }" @click="toggle" ref="buttonRef">
+		<!--开始-->
+		<span
+			v-show="checked && inactiveText && inlinePrompt"
+			style="margin-left: -14px"
+		>
+			{{ handleTextLength(activeText) }}
+		</span>
+		<span class="circle">
+			<i class="iconfont icon-loading" v-show="loading">&#xe756;</i>
+		</span>
+		<!--关闭-->
+		<span
+			v-show="!checked && inactiveText && inlinePrompt"
+			style="margin-right: -14px"
+		>
+			{{ handleTextLength(inactiveText) }}
+		</span>
+	</button>
+	<span v-if="activeText && !inlinePrompt">{{ activeText }}</span>
+</div>
+<div>{{ checked }}</div>
 </template>
 
 <style lang="less">

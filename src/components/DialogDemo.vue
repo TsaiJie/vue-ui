@@ -13,6 +13,9 @@ const handleOk = () => {
 const handleCancel = () => {
     return false;
 };
+const showDialog = () => {
+    // openDialog({});
+};
 </script>
 
 <template>
@@ -41,6 +44,10 @@ const handleCancel = () => {
 		<h2>示例2</h2>
 		<Dialog v-model:visible="visible1" closeOnClickOverlay></Dialog>
 		<Button @click="visible1 = !visible1">toggle</Button>
+	</div>
+	<div>
+		<h2>示例2</h2>
+		<Button @click="showDialog">toggle</Button>
 	</div>
 </div>
 </template>

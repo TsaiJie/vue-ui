@@ -1,3 +1,3 @@
 <template>
-    <div>默认页面</div>
+<div>默认页面</div>
 </template>
