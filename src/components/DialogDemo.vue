@@ -23,7 +23,18 @@ const handleCancel = () => {
                 v-model:visible="visible"
                 :ok="handleOk"
                 :cancel="handleCancel"
-            ></Dialog>
+            >
+                <template v-slot:title>
+                    <strong>我是大标题</strong>
+                </template>
+                <template v-slot:content>
+                    <div>
+                        <p>111</p>
+                        <p>222</p>
+                        <p>333</p>
+                    </div>
+                </template>
+            </Dialog>
             <Button @click="visible = !visible">toggle</Button>
         </div>
         <div>

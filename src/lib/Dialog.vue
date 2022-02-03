@@ -38,12 +38,11 @@ const handleOk = () => {
         <div class="tsai-dialog-wrapper">
             <div class="tsai-dialog">
                 <header>
-                    标题
+                    <slot name="title">默认标题</slot>
                     <span class="tsai-dialog-close" @click="handleClose"></span>
                 </header>
                 <main>
-                    <p>111</p>
-                    <p>222</p>
+                    <slot name="content"> 默认内容 </slot>
                 </main>
                 <footer>
                     <Button level="primary" @click="handleOk">OK</Button>
