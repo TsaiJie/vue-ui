@@ -30,27 +30,32 @@ const handleOk = () => {
 </script>
 
 <template>
-    <template v-if="visible">
-        <div
-            class="tsai-dialog-overlay"
-            @click="handleCloseOnClickOverlay"
-        ></div>
-        <div class="tsai-dialog-wrapper">
-            <div class="tsai-dialog">
-                <header>
-                    <slot name="title">默认标题</slot>
-                    <span class="tsai-dialog-close" @click="handleClose"></span>
-                </header>
-                <main>
-                    <slot name="content"> 默认内容 </slot>
-                </main>
-                <footer>
-                    <Button level="primary" @click="handleOk">OK</Button>
-                    <Button @click="handleCancel">Cancel</Button>
-                </footer>
-            </div>
-        </div>
-    </template>
+<teleport to="body">
+	<template v-if="visible">
+		<div
+			class="tsai-dialog-overlay"
+			@click="handleCloseOnClickOverlay"
+		></div>
+		<div class="tsai-dialog-wrapper">
+			<div class="tsai-dialog">
+				<header>
+					<slot name="title">默认标题</slot>
+					<span
+						class="tsai-dialog-close"
+						@click="handleClose"
+					></span>
+				</header>
+				<main>
+					<slot name="content"> 默认内容 </slot>
+				</main>
+				<footer>
+					<Button level="primary" @click="handleOk">OK</Button>
+					<Button @click="handleCancel">Cancel</Button>
+				</footer>
+			</div>
+		</div>
+	</template>
+</teleport>
 </template>
 
 <style lang="less" scoped>

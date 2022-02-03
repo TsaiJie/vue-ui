@@ -25,5 +25,12 @@ module.exports = {
         semi: ['error', 'always'],
         'vue/no-multiple-template-root': 'off',
         'vue/multi-word-component-names': 0,
+        'vue/html-indent': [
+            'error',
+            'tab',
+            {
+                baseIndent: 0,
+            },
+        ],
     },
 };

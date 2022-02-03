@@ -16,33 +16,33 @@ const handleCancel = () => {
 </script>
 
 <template>
-    <div>
-        <div>
-            <h2>示例1</h2>
-            <Dialog
-                v-model:visible="visible"
-                :ok="handleOk"
-                :cancel="handleCancel"
-            >
-                <template v-slot:title>
-                    <strong>我是大标题</strong>
-                </template>
-                <template v-slot:content>
-                    <div>
-                        <p>111</p>
-                        <p>222</p>
-                        <p>333</p>
-                    </div>
-                </template>
-            </Dialog>
-            <Button @click="visible = !visible">toggle</Button>
-        </div>
-        <div>
-            <h2>示例2</h2>
-            <Dialog v-model:visible="visible1" closeOnClickOverlay></Dialog>
-            <Button @click="visible1 = !visible1">toggle</Button>
-        </div>
-    </div>
+<div>
+	<div>
+		<h2>示例1</h2>
+		<Dialog
+			v-model:visible="visible"
+			:ok="handleOk"
+			:cancel="handleCancel"
+		>
+			<template v-slot:title>
+				<strong>我是大标题</strong>
+			</template>
+			<template v-slot:content>
+				<div>
+					<p>111</p>
+					<p>222</p>
+					<p>333</p>
+				</div>
+			</template>
+		</Dialog>
+		<Button @click="visible = !visible">toggle</Button>
+	</div>
+	<div>
+		<h2>示例2</h2>
+		<Dialog v-model:visible="visible1" closeOnClickOverlay></Dialog>
+		<Button @click="visible1 = !visible1">toggle</Button>
+	</div>
+</div>
 </template>
 
 <style scoped></style>

@@ -4,7 +4,7 @@
 
 <template>
 <div>
-    我是Tabs组件
+	我是Tabs组件
 </div>
 </template>
 
