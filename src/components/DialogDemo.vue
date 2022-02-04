@@ -36,6 +36,7 @@ const showDialog = () => {
 			:ok="handleOk"
 			:cancel="handleCancel"
 		>
+			<!--            ts-ignore-->
 			<template v-slot:title>
 				<strong>我是大标题</strong>
 			</template>

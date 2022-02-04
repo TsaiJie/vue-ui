@@ -14,7 +14,7 @@ const toggleAside = () => {
 		</svg>
 	</router-link>
 	<ul class="menu">
-		<router-link to="/doc">文档</router-link>
+		<router-link to="/doc/intro">文档</router-link>
 	</ul>
 	<span class="toggleAsideButton" @click="toggleAside">
 		<i class="iconfont iconfont-menu">&#xe655;</i>

@@ -1,5 +1,6 @@
+<script setup>
+import md from '../markdown/install.md';
+</script>
 <template>
-<div>
-	安装
-</div>
+<md />
 </template>

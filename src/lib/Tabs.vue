@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {computed, toRefs, useSlots, ref, watchEffect} from 'vue';
+import {computed, toRefs, useSlots, ref, watchEffect, ComponentPublicInstance} from 'vue';
 import Tab from './Tab.vue';
 interface TabsProps {
     selected: string;
@@ -7,7 +7,7 @@ interface TabsProps {
 const props = withDefaults(defineProps<TabsProps>(), {
     selected: '',
 });
-const selectedItem = ref<HTMLDivElement | null>(null);
+const selectedItem = ref<Element | null | ComponentPublicInstance>(null);
 const indicatorRef = ref<HTMLDivElement | null>(null);
 const containerRef = ref<HTMLDivElement | null>(null);
 
@@ -31,7 +31,7 @@ const handClick = (title: string) => {
 watchEffect(() => {
     if (indicatorRef.value && containerRef.value && selectedItem.value) {
         const { width, left: resultLeft } =
-            selectedItem.value.getBoundingClientRect();
+            (selectedItem.value as HTMLDivElement).getBoundingClientRect();
         const { left: containerLeft } =
             containerRef.value.getBoundingClientRect();
         const left = resultLeft - containerLeft;
@@ -39,6 +39,7 @@ watchEffect(() => {
         indicatorRef.value.style.left = left + 'px';
     }
 });
+
 </script>
 
 <template>
@@ -48,9 +49,10 @@ watchEffect(() => {
 			class="tsai-tabs-nav-item"
 			v-for="item in defaultSlots"
 			:class="{ selected: item.props?.title === selected }"
-			:key="item"
+			:key="item.props?.title"
 			:ref="
 				el => {
+
 					if (el && item.props?.title === selected)
 						selectedItem = el;
 				}

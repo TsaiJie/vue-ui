@@ -1,5 +1,8 @@
+<script setup>
+import md from '../markdown/intro.md';
+</script>
 <template>
-<div>
-	介绍
-</div>
+<md />
 </template>
+
+
