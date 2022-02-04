@@ -1,5 +1,12 @@
 <script lang="ts" setup>
-import {computed, toRefs, useSlots, ref, watchEffect, ComponentPublicInstance} from 'vue';
+import {
+    computed,
+    toRefs,
+    useSlots,
+    ref,
+    watchEffect,
+    ComponentPublicInstance,
+} from 'vue';
 import Tab from './Tab.vue';
 interface TabsProps {
     selected: string;
@@ -30,8 +37,9 @@ const handClick = (title: string) => {
 };
 watchEffect(() => {
     if (indicatorRef.value && containerRef.value && selectedItem.value) {
-        const { width, left: resultLeft } =
-            (selectedItem.value as HTMLDivElement).getBoundingClientRect();
+        const { width, left: resultLeft } = (
+            selectedItem.value as HTMLDivElement
+        ).getBoundingClientRect();
         const { left: containerLeft } =
             containerRef.value.getBoundingClientRect();
         const left = resultLeft - containerLeft;
@@ -39,38 +47,36 @@ watchEffect(() => {
         indicatorRef.value.style.left = left + 'px';
     }
 });
-
 </script>
 
 <template>
-<div class="tsai-tabs">
-	<div class="tsai-tabs-nav" ref="containerRef">
-		<div
-			class="tsai-tabs-nav-item"
-			v-for="item in defaultSlots"
-			:class="{ selected: item.props?.title === selected }"
-			:key="item.props?.title"
-			:ref="
-				el => {
-
-					if (el && item.props?.title === selected)
-						selectedItem = el;
-				}
-			"
-			@click="handClick(item.props?.title)"
-		>
-			{{ item.props?.title }}
-		</div>
-		<div class="tsai-tabs-nav-indicator" ref="indicatorRef"></div>
-	</div>
-	<div class="tsai-tabs-content">
-		<component
-			class="tsai-tabs-content-item"
-			:is="current"
-			:key="current"
-		/>
-	</div>
-</div>
+    <div class="tsai-tabs">
+        <div class="tsai-tabs-nav" ref="containerRef">
+            <div
+                class="tsai-tabs-nav-item"
+                v-for="item in defaultSlots"
+                :class="{ selected: item.props?.title === selected }"
+                :key="item.props?.title"
+                :ref="
+                    el => {
+                        if (el && item.props?.title === selected)
+                            selectedItem = el;
+                    }
+                "
+                @click="handClick(item.props?.title)"
+            >
+                {{ item.props?.title }}
+            </div>
+            <div class="tsai-tabs-nav-indicator" ref="indicatorRef"></div>
+        </div>
+        <div class="tsai-tabs-content">
+            <component
+                class="tsai-tabs-content-item"
+                :is="current"
+                :key="current"
+            />
+        </div>
+    </div>
 </template>
 
 <style lang="less">

@@ -7,19 +7,19 @@ const toggleAside = () => {
 };
 </script>
 <template>
-<div class="top-nav">
-	<router-link to="/" class="logo">
-		<svg class="icon" aria-hidden="true">
-			<use xlink:href="#icon-cai"></use>
-		</svg>
-	</router-link>
-	<ul class="menu">
-		<router-link to="/doc/intro">文档</router-link>
-	</ul>
-	<span class="toggleAsideButton" @click="toggleAside">
-		<i class="iconfont iconfont-menu">&#xe655;</i>
-	</span>
-</div>
+    <div class="top-nav">
+        <router-link to="/" class="logo">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-cai"></use>
+            </svg>
+        </router-link>
+        <ul class="menu">
+            <router-link to="/doc/intro">文档</router-link>
+        </ul>
+        <span class="toggleAsideButton" @click="toggleAside">
+            <i class="iconfont iconfont-menu">&#xe655;</i>
+        </span>
+    </div>
 </template>
 
 <style scoped lang="less">

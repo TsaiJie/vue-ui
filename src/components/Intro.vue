@@ -2,7 +2,5 @@
 import md from '../markdown/intro.md';
 </script>
 <template>
-<md />
+    <md />
 </template>
-
-

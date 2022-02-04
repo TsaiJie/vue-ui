@@ -6,14 +6,13 @@ const selected = ref('导航222222');
 </script>
 
 <template>
-<div>
-	<Tabs v-model:selected="selected">
-		<Tab title="导航1">内容1</Tab>
-		<Tab title="导航222222">内容2</Tab>
-		<Tab title="导航3">内容3</Tab>
-	</Tabs>
-	
-</div>
+    <div>
+        <Tabs v-model:selected="selected">
+            <Tab title="导航1">内容1</Tab>
+            <Tab title="导航222222">内容2</Tab>
+            <Tab title="导航3">内容3</Tab>
+        </Tabs>
+    </div>
 </template>
 
 <style scoped></style>

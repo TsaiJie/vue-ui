@@ -1,4 +1,4 @@
-import {createApp, h as creatElement} from 'vue';
+import { createApp, h as creatElement } from 'vue';
 import Dialog from '@/lib/Dialog.vue';
 interface DialogProps {
     title: string | object;
