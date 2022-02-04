@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import Switch from '@/lib/Switch.vue';
+import SwitchDemo1 from './SwitchDemo/Switch1.demo.vue';
+import SwitchDemo2 from './SwitchDemo/Switch2.demo.vue';
 import Button from '@/lib/Button.vue';
 import { ref } from 'vue';
 const checked = ref(true);
@@ -25,7 +27,7 @@ const beforeChange2 = () => {
         <div class="demo">
             <h2>常规用法</h2>
             <div class="demo-component">
-                <Switch v-model:checked="checked" />
+                <SwitchDemo1 />
             </div>
             <div class="demo-actions">
                 <Button>显示代码</Button>
@@ -34,13 +36,25 @@ const beforeChange2 = () => {
                 <pre>&lt;Switch v-model:value="bool" /&gt;</pre>
             </div>
         </div>
-
-        <hr />
-        <Switch
+        <div class="demo">
+            <h2>自定义颜色</h2>
+            <div class="demo-component">
+                <SwitchDemo2 />
+            </div>
+            <div class="demo-actions">
+                <Button>显示代码</Button>
+            </div>
+            <div class="demo-code">
+                <pre>
+        &lt;Switch
             v-model:checked="checked"
             active-color="#13ce66"
-            inactive-color="#ff4949"
-        />
+            inactive-color="#ff4949" /&gt;
+        </pre
+                >
+            </div>
+        </div>
+
         <hr />
         <Switch
             v-model:checked="checked"
