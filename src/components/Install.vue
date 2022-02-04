@@ -1,6 +1,6 @@
-<script setup>
-import md from '../markdown/install.md';
+<script setup lang="ts">
+import Markdown from './Markdown.vue';
 </script>
 <template>
-    <md />
+    <Markdown path="../markdown/install.md" />
 </template>

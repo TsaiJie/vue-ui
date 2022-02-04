@@ -1,7 +1,6 @@
 import { createApp } from 'vue';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-
 import router from '@/router';
 import '@/tsai.less';
 import '@/index.less';
