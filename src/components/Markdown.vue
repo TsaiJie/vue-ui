@@ -12,5 +12,5 @@ import(props.path).then(result => {
 });
 </script>
 <template>
-    <component :is="content" :key="content"></component>
+    <component :is="content" :key="content" />
 </template>

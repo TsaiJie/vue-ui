@@ -9,7 +9,13 @@ import Default from '@/components/Default.vue';
 import Start from '@/components/Start.vue';
 import Intro from '@/components/Intro.vue';
 import Install from '@/components/Install.vue';
-
+import Markdown from '@/components/Markdown.vue';
+import { h as createElement } from 'vue';
+const md = (fileName: string) =>
+    createElement(Markdown, {
+        path: `../markdown/${fileName}.md`,
+        key: fileName,
+    });
 const history = createWebHashHistory();
 const router = createRouter({
     history: history,
@@ -25,15 +31,15 @@ const router = createRouter({
                 },
                 {
                     path: 'intro',
-                    component: Intro,
+                    component: md('intro'),
                 },
                 {
                     path: 'install',
-                    component: Install,
+                    component: md('install'),
                 },
                 {
                     path: 'start',
-                    component: Start,
+                    component: md('start'),
                 },
                 {
                     path: 'switch',

@@ -4,7 +4,6 @@ import { createApp } from 'vue';
 import router from '@/router';
 import '@/tsai.less';
 import '@/index.less';
-
 import App from '@/App.vue';
 
 const app = createApp(App);
