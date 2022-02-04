@@ -152,7 +152,7 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
 			{{ handleTextLength(activeText) }}
 		</span>
 		<span class="circle">
-			<i class="iconfont icon-loading" v-show="loading">&#xe756;</i>
+			<i class="loading" v-show="loading"></i>
 		</span>
 		<!--关闭-->
 		<span
@@ -170,6 +170,7 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
 <style lang="less">
 @buttonH: 22px;
 @spanH: @buttonH - 4px;
+@blue: #40a9ff;
 @keyframes circle {
     0% {
         transform: rotate(0);
@@ -221,8 +222,14 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
         transition: left 250ms;
         justify-content: center;
         align-items: center;
-        .icon-loading {
-            animation: circle infinite 1.5s linear;
+        > .loading {
+            width: 10px;
+            height: 10px;
+            border-radius: 8px;
+            border-color: grey grey gray transparent;
+            border-style: solid;
+            border-width: 2px;
+            animation: circle 1s infinite linear;
         }
     }
 }

@@ -8,7 +8,11 @@ const toggleAside = () => {
 </script>
 <template>
 <div class="top-nav">
-	<div class="logo">LOGO</div>
+	<div class="logo">
+		<svg class="icon" aria-hidden="true">
+			<use xlink:href="#icon-cai"></use>
+		</svg>
+	</div>
 	<ul class="menu">
 		<router-link to="/">首页</router-link>
 		<li>菜单2</li>
@@ -20,6 +24,7 @@ const toggleAside = () => {
 </template>
 
 <style scoped lang="less">
+@color: #007974;
 .top-nav {
     display: flex;
     padding: 16px;
@@ -30,11 +35,15 @@ const toggleAside = () => {
     z-index: 10;
     justify-content: center;
     align-items: center;
-
+    color: @color;
     > .logo {
         max-width: 6em;
         //flex + margin-right:auto 可以把相邻的元素忘右边推
         margin-right: auto;
+        > svg {
+            width: 32px;
+            height: 32px;
+        }
     }
 
     > .menu {

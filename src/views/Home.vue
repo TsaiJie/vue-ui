@@ -13,17 +13,39 @@ import TopNav from '../components/TopNav.vue';
 		</p>
 	</div>
 </div>
+<div class="features">
+	<svg class="icon" aria-hidden="true">
+		<use xlink:href="#icon-vue"></use>
+	</svg>
+	<svg class="icon" aria-hidden="true">
+		<use xlink:href="#icon-ts"></use>
+	</svg>
+	<svg class="icon" aria-hidden="true">
+		<use xlink:href="#icon-light"></use>
+	</svg>
+</div>
 </template>
 
 <style lang="less" scoped>
+@green: #02bcb0;
+@border-radius: 4px;
+@color: #007974;
 .top-nav-and-banner {
     background: linear-gradient(
         145deg,
         rgba(227, 255, 253, 1) 0%,
         rgba(183, 233, 230, 1) 100%
     );
+    clip-path: ellipse(80% 60% at 50% 40%);
+}
+.features {
+    > svg {
+        width: 64px;
+        height: 64px;
+    }
 }
 .banner {
+    color: @color;
     padding: 100px 0;
     display: flex;
     //居中
@@ -37,12 +59,14 @@ import TopNav from '../components/TopNav.vue';
 
         a {
             margin: 0 8px;
-            background: #fff;
+            color: white;
+            background: @green;
             display: inline-block;
-            height: 28px;
-            line-height: 28px;
-            border-radius: 14px;
-            padding: 0 8px;
+            border-radius: @border-radius;
+            padding: 8px 24px;
+            &:hover {
+                text-decoration: none;
+            }
         }
     }
 }
