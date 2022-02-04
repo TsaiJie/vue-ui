@@ -43,6 +43,7 @@ const asideVisible = inject<Ref<boolean>>('asideVisible');
 </template>
 
 <style scoped lang="less">
+
 .layout {
     display: flex;
     height: 100vh;
@@ -67,22 +68,36 @@ const asideVisible = inject<Ref<boolean>>('asideVisible');
 }
 
 aside {
-    background: lightblue;
+    background: #baebe9;
     width: 150px;
     position: fixed;
     top: 0;
     left: 0;
-    padding: 70px 16px 16px;
+    padding-top: 70px;
     height: 100%;
     z-index: 9;
     
     > h2 {
         margin-bottom: 4px;
+        padding: 0 16px;
     }
-
+ 
     > ol {
         > li {
-            padding: 4px 0;
+            > a {
+                display: block;
+                padding: 4px 16px;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            .router-link-active {
+
+                background: white;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
         }
     }
 }
