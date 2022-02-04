@@ -183,7 +183,10 @@ const { ...rest } = attrs;
 <button v-bind="rest"></button>>
 ```
 
-vue3 createApp以及h函数的使用
+#### vue3 createApp以及h函数的使用
+
+createApp返回一个提供应用上下文的应用实例。应用实例挂载的整个组件树共享同一个上下文。render可以控制渲染的虚拟dom， h函数就是生成虚拟dom的
+
 ```ts
 import {createApp, h as creatElement} from 'vue';
 import Dialog from '@/lib/Dialog.vue';
@@ -228,4 +231,48 @@ export default (props: DialogProps) => {
 };
 
 ```
+
+#### template ref的使用
+
+```vue
+<template> 
+  <div ref="root">This is a root element</div>
+ <div v-for="(item, i) in list" :ref="el => { if (el) divs[i] = el }">
+    {{ item }}
+  </div>
+</template>
+<script setup>
+  import { ref } from 'vue';
+  const root = ref(null);
+  const divs = ref([]);
+  onMounted(() => {
+        // DOM 元素将在初始渲染后分配给 ref
+        console.log(root.value) // <div>This is a root element</div>
+  })
+  // 确保在每次更新之前重置ref
+  onBeforeUpdate(() => {
+        divs.value = []
+  })
+</script>
+```
+
+#### teleport
+可以把元素传送挂载到特定的位置
+```vue
+<teleport to="#modals">
+<div>A</div>
+</teleport>
+<teleport to="#modals">
+<div>B</div>
+</teleport>
+
+<!-- result-->
+<div id="modals">
+<div>A</div>
+<div>B</div>
+</div>
+
+```
+
+
 

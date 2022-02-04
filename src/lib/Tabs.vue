@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {computed, toRefs, useSlots, ref, watchEffect, onMounted} from 'vue';
+import {computed, toRefs, useSlots, ref, watchEffect} from 'vue';
 import Tab from './Tab.vue';
 interface TabsProps {
     selected: string;
@@ -29,7 +29,6 @@ const handClick = (title: string) => {
     emits('update:selected', title);
 };
 watchEffect(() => {
-
     if (indicatorRef.value && containerRef.value && selectedItem.value) {
         const { width, left: resultLeft } =
             selectedItem.value.getBoundingClientRect();

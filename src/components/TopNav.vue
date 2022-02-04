@@ -21,7 +21,6 @@ const toggleAside = () => {
 
 <style scoped lang="less">
 .top-nav {
-    background: pink;
     display: flex;
     padding: 16px;
     position: fixed;
