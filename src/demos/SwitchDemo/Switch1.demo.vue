@@ -7,3 +7,7 @@ const checked = ref(false);
 <template>
     <Switch v-model:checked="checked" />
 </template>
+
+<demo>
+普通用法
+</demo>

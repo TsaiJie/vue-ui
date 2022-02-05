@@ -6,7 +6,7 @@ const fileRegex = /\.(md)$/;
 import compileSFC from '@vue/compiler-sfc';
 import compileDOM from '@vue/compiler-dom';
 //解析md文件
-import { parse }  from 'marked';
+import { parse } from 'marked';
 export default function md() {
     return {
         //插件名字

@@ -1,1 +1,0 @@
-<Switch v-model:checked="checked" />

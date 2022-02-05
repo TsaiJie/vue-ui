@@ -10,7 +10,7 @@ import Markdown from '@/components/Markdown.vue';
 import { h as createElement } from 'vue';
 const md = (fileName: string) =>
     createElement(Markdown, {
-        path: `../markdown/${fileName}.md`,
+        path: fileName,
         key: fileName,
     });
 const history = createWebHashHistory();

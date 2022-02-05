@@ -11,3 +11,6 @@ const checked = ref(false);
         inactive-color="#ff4949"
     />
 </template>
+<demo>
+自定义颜色
+</demo>

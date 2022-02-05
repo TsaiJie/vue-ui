@@ -13,6 +13,7 @@ const beforeChange = () => {
         }, 1000);
     });
 };
+
 const beforeChange2 = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -20,6 +21,7 @@ const beforeChange2 = () => {
         }, 1000);
     });
 };
+console.dir(SwitchDemo1.__demoSourceCode);
 </script>
 <template>
     <div>
@@ -33,7 +35,7 @@ const beforeChange2 = () => {
                 <Button>显示代码</Button>
             </div>
             <div class="demo-code">
-                <pre>&lt;Switch v-model:value="bool" /&gt;</pre>
+                <pre v-text="SwitchDemo1.__demoSourceCode"></pre>
             </div>
         </div>
         <div class="demo">
@@ -45,13 +47,7 @@ const beforeChange2 = () => {
                 <Button>显示代码</Button>
             </div>
             <div class="demo-code">
-                <pre>
-        &lt;Switch
-            v-model:checked="checked"
-            active-color="#13ce66"
-            inactive-color="#ff4949" /&gt;
-        </pre
-                >
+                <pre v-text="SwitchDemo2.__demoSourceCode"></pre>
             </div>
         </div>
 
