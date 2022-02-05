@@ -62,14 +62,11 @@ const toggle = () => {
     if (beforeChange && beforeChange.value instanceof Function) {
         const buttonEl = buttonRef.value;
         if (buttonEl) {
-            const loadingEl = buttonEl.querySelector(
-                '.icon-loading'
-            ) as HTMLElement;
+            const loadingEl = buttonEl.querySelector('.loading') as HTMLElement;
             const { className } = buttonEl;
             buttonEl.className = `${className} tsai-disabled`;
             loadingEl.style.display = 'inline-block';
             const shouldToggle = beforeChange.value();
-            console.log(loadingEl);
             shouldToggle
                 .then(result => {
                     if (result) {
@@ -169,7 +166,6 @@ const changeTextColor = (buttonEl: HTMLButtonElement, flag: boolean) => {
         </button>
         <span v-if="activeText && !inlinePrompt">{{ activeText }}</span>
     </div>
-    <div>{{ checked }}</div>
 </template>
 
 <style lang="less">
