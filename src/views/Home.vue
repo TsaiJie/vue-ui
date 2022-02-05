@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+import { inject, Ref } from 'vue';
 import TopNav from '../components/TopNav.vue';
+import Doc from './Doc.vue';
+const asideVisible = inject<Ref<boolean>>('asideVisible');
 </script>
 <template>
     <div class="top-nav-and-banner">
@@ -13,6 +16,7 @@ import TopNav from '../components/TopNav.vue';
             </p>
         </div>
     </div>
+    <Doc class="doc" v-if="asideVisible"></Doc>
     <div class="features">
         <ul>
             <li>
@@ -44,6 +48,9 @@ import TopNav from '../components/TopNav.vue';
 @green: #02bcb0;
 @border-radius: 4px;
 @color: #007974;
+.doc {
+    position: fixed;
+}
 .top-nav-and-banner {
     background: linear-gradient(
         145deg,
