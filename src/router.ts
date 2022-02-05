@@ -4,7 +4,7 @@ import Doc from '@/views/Doc.vue';
 import Switch from '@/demos/SwitchDemo.vue';
 import Button from '@/demos/ButtonDemo.vue';
 import Dialog from '@/demos/DialogDemo.vue';
-import Tabs from '@/components/TabsDemo.vue';
+import Tabs from '@/demos/TabsDemo.vue';
 import Markdown from '@/components/Markdown.vue';
 import { h as createElement } from 'vue';
 const md = (fileName: string) =>
