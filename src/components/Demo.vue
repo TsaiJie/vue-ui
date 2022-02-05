@@ -37,8 +37,9 @@ const toggleCodeShow = () => {
         </div>
     </div>
 </template>
-<style lang="less">
+<style lang="less" scoped>
 @border-color: #d9d9d9;
+
 .demo {
     border: 1px solid @border-color;
     margin: 16px 0 32px;
@@ -64,6 +65,20 @@ const toggleCodeShow = () => {
             line-height: 1.1;
             font-family: Consolas, 'Courier New', Courier, monospace;
             margin: 0;
+        }
+    }
+    .v-enter-active {
+        animation: spin 0.3s ease-out both;
+    }
+    .v-leave-active {
+        animation: spin 0.3s ease-out both reverse;
+    }
+    @keyframes spin {
+        from {
+            transform: translateX(-100px);
+        }
+        to {
+            transform: translateX(0px);
         }
     }
 }

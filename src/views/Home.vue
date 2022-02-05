@@ -16,7 +16,7 @@ const asideVisible = inject<Ref<boolean>>('asideVisible');
             </p>
         </div>
     </div>
-    <Doc class="doc" v-if="asideVisible"></Doc>
+    <!-- <Doc class="doc" v-if="asideVisible"></Doc> -->
     <div class="features">
         <ul>
             <li>
