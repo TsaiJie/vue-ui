@@ -1,9 +1,13 @@
 <script lang="ts" setup>
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-okaidia.css';
 import Switch from '@/lib/Switch.vue';
 import Switch1Demo from './SwitchDemo/Switch1.demo.vue';
 import Switch2Demo from './SwitchDemo/Switch2.demo.vue';
 import Button from '@/lib/Button.vue';
 import { ref } from 'vue';
+
+console.log();
 const checked = ref(true);
 const checked1 = ref(true);
 const beforeChange = () => {
@@ -34,7 +38,16 @@ const beforeChange2 = () => {
                 <Button>显示代码</Button>
             </div>
             <div class="demo-code">
-                <pre>{{ Switch1Demo.__demoSourceCode }}</pre>
+                <pre
+                    class="language-html"
+                    v-html="
+                        Prism.highlight(
+                            Switch1Demo.__demoSourceCode,
+                            Prism.languages.html,
+                            'html'
+                        )
+                    "
+                ></pre>
             </div>
         </div>
         <div class="demo">
@@ -46,7 +59,16 @@ const beforeChange2 = () => {
                 <Button>显示代码</Button>
             </div>
             <div class="demo-code">
-                <pre v-text="Switch2Demo.__demoSourceCode"></pre>
+                <pre
+                    class="language-html"
+                    v-html="
+                        Prism.highlight(
+                            Switch2Demo.__demoSourceCode,
+                            Prism.languages.html,
+                            'html'
+                        )
+                    "
+                ></pre>
             </div>
         </div>
 
