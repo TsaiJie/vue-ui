@@ -10,7 +10,6 @@ const content = ref<VNode>();
 import(`../markdown/${props.path}.md`).then(result => {
     content.value = result.default.render() as VNode;
 });
-console.log('111');
 </script>
 <template>
     <component :is="content" :key="content" />

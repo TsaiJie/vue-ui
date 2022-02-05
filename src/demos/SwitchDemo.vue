@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Switch from '@/lib/Switch.vue';
-import SwitchDemo1 from './SwitchDemo/Switch1.demo.vue';
-import SwitchDemo2 from './SwitchDemo/Switch2.demo.vue';
+import Switch1Demo from './SwitchDemo/Switch1.demo.vue';
+import Switch2Demo from './SwitchDemo/Switch2.demo.vue';
 import Button from '@/lib/Button.vue';
 import { ref } from 'vue';
 const checked = ref(true);
@@ -21,7 +21,6 @@ const beforeChange2 = () => {
         }, 1000);
     });
 };
-console.dir(SwitchDemo1.__demoSourceCode);
 </script>
 <template>
     <div>
@@ -29,25 +28,25 @@ console.dir(SwitchDemo1.__demoSourceCode);
         <div class="demo">
             <h2>常规用法</h2>
             <div class="demo-component">
-                <SwitchDemo1 />
+                <component :is="Switch1Demo"></component>
             </div>
             <div class="demo-actions">
                 <Button>显示代码</Button>
             </div>
             <div class="demo-code">
-                <pre v-text="SwitchDemo1.__demoSourceCode"></pre>
+                <pre>{{ Switch1Demo.__demoSourceCode }}</pre>
             </div>
         </div>
         <div class="demo">
             <h2>自定义颜色</h2>
             <div class="demo-component">
-                <SwitchDemo2 />
+                <component :is="Switch2Demo"></component>
             </div>
             <div class="demo-actions">
                 <Button>显示代码</Button>
             </div>
             <div class="demo-code">
-                <pre v-text="SwitchDemo2.__demoSourceCode"></pre>
+                <pre v-text="Switch2Demo.__demoSourceCode"></pre>
             </div>
         </div>
 
