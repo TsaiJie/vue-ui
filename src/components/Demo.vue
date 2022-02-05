@@ -26,8 +26,8 @@ const toggleCodeShow = () => {
             <div class="demo-component">
                 <component :is="comp" :key="comp" />
             </div>
-            <div class="demo-actions" @click="toggleCodeShow">
-                <Button>{{ buttonText }}</Button>
+            <div class="demo-actions">
+                <Button @click="toggleCodeShow">{{ buttonText }}</Button>
             </div>
             <transition>
                 <div class="demo-code" v-if="codeVisible">
