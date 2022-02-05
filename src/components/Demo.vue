@@ -2,28 +2,36 @@
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-okaidia.css';
 import Button from '@/lib/Button.vue';
-import { computed, DefineComponent } from 'vue';
+import { computed, DefineComponent, ref } from 'vue';
 interface DemoProps {
     comp: DefineComponent;
 }
 const { comp } = withDefaults(defineProps<DemoProps>(), {});
+// 给html上色
 const html = computed(() =>
     Prism.highlight(comp.__demoSourceCode, Prism.languages.html, 'html')
 );
+const codeVisible = ref(false);
+const buttonText = computed(() => (codeVisible.value ? '隐藏代码' : '显示代码'));
+const toggleCodeShow = () => {
+    codeVisible.value = !codeVisible.value;
+};
 </script>
 <template>
     <div>
         <div class="demo">
             <h2>{{ comp.__demoTitle }}</h2>
             <div class="demo-component">
-                <component :is="comp" :key="comp"></component>
+                <component :is="comp" :key="comp" />
             </div>
-            <div class="demo-actions">
-                <Button>显示代码</Button>
+            <div class="demo-actions" @click="toggleCodeShow">
+                <Button>{{ buttonText }}</Button>
             </div>
-            <div class="demo-code">
-                <pre class="language-html" v-html="html"></pre>
-            </div>
+            <transition>
+                <div class="demo-code" v-if="codeVisible">
+                    <pre class="language-html" v-html="html"></pre>
+                </div>
+            </transition>
         </div>
     </div>
 </template>
@@ -41,6 +49,7 @@ const html = computed(() =>
         padding: 16px;
     }
     &-actions {
+        text-align: right;
         padding: 8px 16px;
         border-top: 1px dashed @border-color;
     }
