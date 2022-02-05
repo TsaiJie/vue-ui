@@ -5,7 +5,6 @@ import Switch from '@/demos/SwitchDemo.vue';
 import Button from '@/components/ButtonDemo.vue';
 import Dialog from '@/components/DialogDemo.vue';
 import Tabs from '@/components/TabsDemo.vue';
-import Default from '@/components/Default.vue';
 import Markdown from '@/components/Markdown.vue';
 import { h as createElement } from 'vue';
 const md = (fileName: string) =>
@@ -24,7 +23,7 @@ const router = createRouter({
             children: [
                 {
                     path: '',
-                    component: Default,
+                    redirect: '/doc/intro',
                 },
                 {
                     path: 'intro',

@@ -20,5 +20,3 @@ import Demo from '@/components/Demo.vue';
         <Demo :comp="Switch7Demo" />
     </div>
 </template>
-
-<style scoped lang="less"></style>

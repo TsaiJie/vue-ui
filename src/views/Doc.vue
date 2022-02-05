@@ -6,62 +6,66 @@ const asideVisible = inject<Ref<boolean>>('asideVisible');
 </script>
 
 <template>
-<div class="layout">
-	<TopNav class="top-nav"/>
-	<div class="content">
-		<aside v-show="asideVisible">
-			<h2>文档</h2>
-			<ol>
-				<li>
-					<router-link to="/doc/intro">介绍</router-link>
-				</li> <li>
-					<router-link to="/doc/install">安装</router-link>
-				</li> <li>
-					<router-link to="/doc/start">开始使用</router-link>
-				</li>
-			</ol>
-			<h2>组件列表</h2>
-			<ol>
-				<li>
-					<router-link to="/doc/switch">Switch 组件</router-link>
-				</li>
-				<li>
-					<router-link to="/doc/button">Button 组件</router-link>
-				</li>
-				<li>
-					<router-link to="/doc/dialog">Dialog 组件</router-link>
-				</li>
-				<li>
-					<router-link to="/doc/tabs">Tabs 组件</router-link>
-				</li>
-			</ol>
-		</aside>
-
-		<router-view class="main" />
-	</div>
-</div>
+    <div class="layout">
+        <TopNav class="top-nav" />
+        <div class="content">
+            <aside v-show="asideVisible">
+                <h2>文档</h2>
+                <ol>
+                    <li>
+                        <router-link to="/doc/intro">介绍</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/doc/install">安装</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/doc/start">开始使用</router-link>
+                    </li>
+                </ol>
+                <h2>组件列表</h2>
+                <ol>
+                    <li>
+                        <router-link to="/doc/switch">Switch 组件</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/doc/button">Button 组件</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/doc/dialog">Dialog 组件</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/doc/tabs">Tabs 组件</router-link>
+                    </li>
+                </ol>
+            </aside>
+            <main>
+                <router-view class="main" />
+            </main>
+        </div>
+    </div>
 </template>
 
 <style scoped lang="less">
-
+main {
+    overflow: auto;
+}
 .layout {
     display: flex;
+    flex-direction: column;
     height: 100vh;
     > .top-nav {
         flex-shrink: 0;
     }
-    >.content {
-        display: flex;
+    > .content {
         flex-grow: 1;
         padding-top: 60px;
         padding-left: 156px;
-        > .main {
+        > main {
             flex-grow: 1;
             background: #ffffff;
             padding: 16px;
-            overflow: auto;
         }
-        @media(max-width: 500px){
+        @media (max-width: 500px) {
             padding-left: 0;
         }
     }
@@ -76,12 +80,12 @@ aside {
     padding-top: 70px;
     height: 100%;
     z-index: 9;
-    
+
     > h2 {
         margin-bottom: 4px;
         padding: 0 16px;
     }
- 
+
     > ol {
         > li {
             > a {
@@ -92,7 +96,6 @@ aside {
                 }
             }
             .router-link-active {
-
                 background: white;
                 &:hover {
                     text-decoration: none;
@@ -101,7 +104,4 @@ aside {
         }
     }
 }
-
-
-
 </style>

@@ -12,7 +12,9 @@ const html = computed(() =>
     Prism.highlight(comp.__demoSourceCode, Prism.languages.html, 'html')
 );
 const codeVisible = ref(false);
-const buttonText = computed(() => (codeVisible.value ? '隐藏代码' : '显示代码'));
+const buttonText = computed(() =>
+    codeVisible.value ? '隐藏代码' : '显示代码'
+);
 const toggleCodeShow = () => {
     codeVisible.value = !codeVisible.value;
 };
@@ -40,6 +42,7 @@ const toggleCodeShow = () => {
 .demo {
     border: 1px solid @border-color;
     margin: 16px 0 32px;
+    overflow: hidden;
     > h2 {
         font-size: 20px;
         padding: 8px 16px;
@@ -56,6 +59,7 @@ const toggleCodeShow = () => {
     &-code {
         padding: 8px 16px;
         border-top: 1px dashed @border-color;
+        overflow: hidden;
         > pre {
             line-height: 1.1;
             font-family: Consolas, 'Courier New', Courier, monospace;

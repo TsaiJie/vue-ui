@@ -25,6 +25,7 @@ const toggleAside = () => {
 <style scoped lang="less">
 @color: #007974;
 .top-nav {
+    background: linear-gradient(145deg, #e3fffd 0%, #b7e9e6 100%);
     display: flex;
     padding: 16px;
     position: fixed;
