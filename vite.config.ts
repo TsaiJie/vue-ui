@@ -23,7 +23,7 @@ const lib = defineConfig({
             // 设置名字
             name: 'tsai-vue-ui',
             // 打包后的名字
-            fileName: format => `lib/tsai-vue-ui.${format}.js`,
+            fileName: () => `tsai-vue-ui.js`,
         },
         outDir: 'dist_lib',
         sourcemap: true,
@@ -34,7 +34,7 @@ const lib = defineConfig({
                     vue: 'Vue',
                 },
             },
-        },
+        }
     },
 });
 const project = defineConfig({
@@ -47,9 +47,8 @@ const project = defineConfig({
     },
     // 打包配置
     build: {
-        outDir: 'dist_website'
-    }
-
+        outDir: 'dist_website',
+    },
 });
 
 export default ({ mode }) => {
