@@ -1,10 +1,11 @@
 {
-  "name": "tsai-ui",
+  "name": "tsai-vue-ui",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "build": "vue-tsc --noEmit && vite build --mode project",
+    "preview": "vite preview",
+    "lib": "vite build --mode lib"
   },
   "dependencies": {
     "prismjs": "^1.26.0",

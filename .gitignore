@@ -3,6 +3,10 @@ node_modules
 dist
 /dist
 dist-ssr
+/dist_lib
+dist_lib
+/dist_website
+dist_website
 *.local
 .vscode
 .idea
