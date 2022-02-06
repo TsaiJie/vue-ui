@@ -17,4 +17,10 @@ export default defineConfig({
             '@': path.resolve('src'),
         },
     },
+    // 打包配置
+    build: {
+        lib: {
+            entry: path.resolve(__dirname, 'scr/lib/index.ts')
+        }
+    }
 });

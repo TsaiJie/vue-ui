@@ -13,7 +13,6 @@ const handleCancel = () => {
 
 <template>
     <Dialog v-model:visible="visible" :ok="handleOk" :cancel="handleCancel">
-        <!--            ts-ignore-->
         <template v-slot:title>
             <strong>我是大标题</strong>
         </template>
