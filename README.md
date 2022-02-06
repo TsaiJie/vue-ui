@@ -20,7 +20,7 @@
            type: Number,
            required: true,
        },
-   }); 
+   });
    
    //good
    const props =  defineProps({
@@ -28,7 +28,7 @@
            type: Number,
            required: true,
        },
-   }); 
+   });
    // 这样可以保持响应式，如果需要解构的话要使用toRefs，不使用toRefs的话，也可以直接使用props.count
    const { count } = toRefs(props);
    ```
@@ -41,11 +41,11 @@
               type: Number,
               required: true,
           },
-      }); 
+      });
       const { count } = toRefs(props);
       ```
 
-      
+
 
    2. 第二种ts写法， 借助 withDefaults来设置默认值，使用ts限制类型。
 
@@ -168,7 +168,7 @@ rules: {
 // 普通 <script>, 在模块范围下执行(只执行一次)
 // 声明额外的选项
 export default {
-    inheritAttrs: false, 
+    inheritAttrs: false,
     customOptions: {}
 }
 </script>
@@ -235,7 +235,7 @@ export default (props: DialogProps) => {
 #### template ref的使用
 
 ```vue
-<template> 
+<template>
   <div ref="root">This is a root element</div>
  <div v-for="(item, i) in list" :ref="el => { if (el) divs[i] = el }">
     {{ item }}
@@ -274,5 +274,172 @@ export default (props: DialogProps) => {
 
 ```
 
+### 编写vite2组件(v2.7.2)
 
+实现md文件的解析
+
+```js
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+const fileRegex = /\.(md)$/;
+//将md文件解析成vue能识别的组件
+
+import compileSFC from '@vue/compiler-sfc';
+import compileDOM from '@vue/compiler-dom';
+//解析md文件
+import { parse } from 'marked';
+export default function md() {
+    return {
+        //插件名字
+        name: 'markdown-loader',
+        transform(src, id) {
+            //判断是不是md结尾的文件
+            if (fileRegex.test(id)) {
+                //将md文件内容转成html
+                const html = parse(src);
+                //生成vue能解析的格式
+                const ret = compileSFC.parse(
+                    `<template><div class="tsai-md">${html}</div></template>`
+                );
+                const code = compileDOM.compile(
+                    ret.descriptor.template.content,
+                    { mode: 'module' }
+                ).code;
+                const render = `${code};
+                let __script = {};
+                __script.render = render;
+                  export default __script;`;
+                return {
+                    code: render,
+                    map: null,
+                };
+            }
+        },
+    };
+}
+
+```
+
+
+
+实现在特定的组件上，添加信息。（自定义块）
+
+```ts
+// @ts-ignore
+import fs from 'fs';
+import { baseParse } from '@vue/compiler-core';
+const requestRegex = /vue&type=demo/;
+const demoCodePlugin = () => {
+    return {
+        name: 'demoCode',
+        transform(code, id: string) {
+            // 判断请求是否是vue&type=demo自定义块儿请求
+            if (!requestRegex.test(id)) return;
+            // 获取该请求的路径
+            const path = id.split('?')[0];
+            // 读取该路径下的文件
+            const file = fs.readFileSync(path).toString();
+            // 解析该文件, 找到子元素的
+            const parsed = baseParse(file).children.find(
+                // @ts-ignore
+                n => n?.tag === 'demo'
+            );
+            // 获取demo部分的代码，以它为分隔进行分隔（除去demo部分的代码），然后进行连接
+            const main = file.split(parsed.loc.source).join('').trim();
+            // 包装成函数进行导出，挂载到组件上
+            return `export default Comp => {
+              Comp.__demoTitle = ${JSON.stringify(code)};
+              Comp.__demoSourceCode = ${JSON.stringify(main)};
+          }`;
+        },
+    };
+};
+export default demoCodePlugin;
+
+```
+
+
+
+### 使用vite2打包组件库(v2.7.2)
+
+```js
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { defineConfig, loadEnv } from 'vite';
+import vue from '@vitejs/plugin-vue';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import path from 'path';
+import md from './plugin/md';
+import demoCode from './plugin/demoCode';
+// https://vitejs.dev/config
+const lib = defineConfig({
+    plugins: [vue()],
+    resolve: {
+        alias: {
+            '@': path.resolve('src'),
+        },
+    },
+    // 打包配置
+    build: {
+        lib: {
+            // 入口文件
+            entry: path.resolve(__dirname, 'src/lib/index.ts'),
+            // 设置名字
+            name: 'tsai-vue-ui',
+            // 打包后的名字
+            fileName: () => `tsai-vue-ui.js`,
+        },
+        outDir: 'dist_lib',
+        sourcemap: true,
+        rollupOptions: {
+            external: ['vue'],
+            output: {
+                globals: {
+                    vue: 'Vue',
+                },
+            },
+        }
+    },
+});
+const project = defineConfig({
+    base: './',
+    plugins: [vue(), md(), demoCode()],
+    resolve: {
+        alias: {
+            '@': path.resolve('src'),
+        },
+    },
+    // 打包配置
+    build: {
+        outDir: 'dist_website',
+    },
+});
+
+export default ({ mode }) => {
+    const url = loadEnv(mode, process.cwd()).VITE_BASEURL;
+    if (url === 'lib') {
+        return lib;
+    } else {
+        return project;
+    }
+};
+
+```
+
+另外需要配置 
+
+`.env` `.env.lib` `.env.project` 文件
+
+```js
+VITE_BASEURL=./
+```
+
+```js
+VITE_BASEURL=lib
+```
+
+```js
+VITE_BASEURL=nf-rollup-tool
+```
 
